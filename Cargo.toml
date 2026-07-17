@@ -24,7 +24,7 @@ std = ["thiserror/default", "varing/default", "bytes_1?/default"]
 
 [dependencies]
 thiserror = { version = "2", default-features = false }
-varing = { version = "0.13", default-features = false }
+varing = { version = "0.14", default-features = false }
 paste = "1"
 
 bytes_1 = { package = "bytes", version = "1", default-features = false, optional = true }
