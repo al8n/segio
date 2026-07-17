@@ -40,7 +40,9 @@ pub struct RefPeeker<'a, B: ?Sized> {
   cursor: usize,
   /// The original start bound of the peeker, used for resetting.
   start: Bound<usize>,
-  /// The original end bound of the peeker, used for resetting.
+  /// The end bound that [`reset`](RefPeeker::reset) restores to. Initialized to the
+  /// construction-time end bound, but re-anchored by `truncate` (and `split_off` /
+  /// `split_to`) so that a later `reset` stays within a narrowed window.
   end: Bound<usize>,
   /// Current limit bound of the peeker
   limit: Bound<usize>,
@@ -283,20 +285,39 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
       Bound::Unbounded => self.buf.remaining(),
     }
   }
+
+  /// Computes the clamped half-open `[start, end)` view into the backing buffer
+  /// that is shared by both [`remaining`](Chunk::remaining) and
+  /// [`buffer`](Chunk::buffer).
+  ///
+  /// The end is clamped to the backing buffer's length and the start is clamped
+  /// to that end, guaranteeing `start <= end <= self.buf.remaining()`. This keeps
+  /// `buffer()` panic-free and upholds the `buffer().len() == remaining()`
+  /// invariant for every `(limit, range)`, including out-of-range limits,
+  /// inverted ranges, and `..=usize::MAX`.
+  #[inline]
+  fn view_bounds(&self) -> (usize, usize)
+  where
+    B: Chunk,
+  {
+    let inner = self.buf.remaining();
+    let end = self.resolve_end_bound(self.limit).min(inner);
+    let start = self.cursor.min(end);
+    (start, end)
+  }
 }
 
 impl<'a, B: 'a + Chunk + ?Sized> Chunk for RefPeeker<'a, B> {
   #[inline]
   fn remaining(&self) -> usize {
-    let end_pos = self.resolve_end_bound(self.limit);
-    end_pos.saturating_sub(self.cursor)
+    let (start, end) = self.view_bounds();
+    end - start
   }
 
   #[inline]
   fn buffer(&self) -> &[u8] {
-    let start = self.cursor.min(self.buf.remaining());
-    let end_pos = self.resolve_end_bound(self.limit);
-    &self.buf.buffer()[start..end_pos]
+    let (start, end) = self.view_bounds();
+    &self.buf.buffer()[start..end]
   }
 
   #[inline]
@@ -350,6 +371,12 @@ impl<'a, B: 'a + Chunk + ?Sized> Chunk for RefPeeker<'a, B> {
     Self::with_cursor_and_bounds_inner(self.buf, start, start_bound, end_bound)
   }
 
+  /// Narrows the view to at most `len` bytes from the current cursor.
+  ///
+  /// This also re-anchors the reset target (`end`), so a later [`reset`](RefPeeker::reset)
+  /// stays within the truncated window instead of widening back to the original bound.
+  /// This diverges from `Putter`, whose `reset` / `reset_position` restores the
+  /// construction-time limit and re-widens past a prior `truncate_mut`.
   #[inline]
   fn truncate(&mut self, len: usize) {
     let current_remaining = self.remaining();
@@ -362,7 +389,12 @@ impl<'a, B: 'a + Chunk + ?Sized> Chunk for RefPeeker<'a, B> {
 
     // Only truncate if the new limit is more restrictive than the current one
     if new_end_pos < current_end_pos {
-      self.limit = Bound::Excluded(new_end_pos);
+      let new_end = Bound::Excluded(new_end_pos);
+      self.limit = new_end;
+      // Re-anchor the reset target too, so a later `reset()` cannot widen the
+      // view back past this truncation. This mirrors `split_off`/`split_to`,
+      // which also update `end` to keep `reset()` bounded.
+      self.end = new_end;
     }
   }
 
@@ -788,5 +820,76 @@ mod tests {
     peeker.reset();
     assert_eq!(peeker.position(), 0);
     assert_eq!(peeker.absolute_position(), 2);
+  }
+
+  // Regression: end bound was stored raw, so `remaining()` overreported and
+  // `buffer()` panicked for out-of-range limits and inverted ranges. The clamped
+  // shared view must keep `buffer().len() == remaining()` and stay panic-free.
+  #[test]
+  fn test_peeker_panic_safety_out_of_range_bounds() {
+    let data = [1u8, 2, 3, 4, 5];
+    let buf = &data[..];
+    let len = data.len(); // 5
+
+    // `with_limit` past the buffer length: previously `remaining() == len + 3`
+    // (a lie) and `buffer()` panicked slicing `&buf[0..len + 3]`.
+    let mut p = RefPeeker::with_limit(&buf, len + 3);
+    assert_eq!(p.buffer().len(), p.remaining());
+    assert_eq!(p.remaining(), len);
+    assert_eq!(p.peek_u8_checked(), Some(1));
+    assert!(p.try_advance(p.remaining()).is_ok());
+    assert_eq!(p.remaining(), 0);
+    assert!(p.try_advance(1).is_err());
+
+    // Inverted range: an empty, non-panicking view (previously panicked
+    // slicing `&buf[5..2]`).
+    let mut p = RefPeeker::with_range(&buf, 5..2);
+    assert_eq!(p.buffer().len(), p.remaining());
+    assert_eq!(p.remaining(), 0);
+    assert_eq!(p.peek_u8_checked(), None);
+    assert!(p.try_advance(0).is_ok());
+    assert!(p.try_advance(1).is_err());
+
+    // `..=usize::MAX`: end clamped to the backing length (previously
+    // `remaining() == usize::MAX`, an allocation oracle).
+    let mut p = RefPeeker::with_range(&buf, ..=usize::MAX);
+    assert_eq!(p.buffer().len(), p.remaining());
+    assert_eq!(p.remaining(), len);
+    assert_eq!(p.peek_u8_checked(), Some(1));
+    assert!(p.try_advance(len).is_ok());
+
+    // Explicit end past the backing length.
+    let mut p = RefPeeker::with_range(&buf, 0..(len + 5));
+    assert_eq!(p.buffer().len(), p.remaining());
+    assert_eq!(p.remaining(), len);
+    assert_eq!(p.peek_u8_checked(), Some(1));
+    assert!(p.try_advance(len).is_ok());
+  }
+
+  // Regression: `truncate()` narrowed `limit` but not `end`, so a later `reset()`
+  // widened the view back past the truncation. `truncate()` must now re-anchor
+  // `end` like the split methods.
+  #[test]
+  fn test_peeker_truncate_then_reset_stays_bounded() {
+    let data = [1u8, 2, 3, 4, 5];
+    let buf = &data[..];
+
+    let mut peeker = RefPeeker::new(&buf);
+    peeker.truncate(2);
+    assert_eq!(peeker.remaining(), 2);
+    peeker.reset();
+    assert!(peeker.remaining() <= 2);
+    assert_eq!(peeker.remaining(), 2);
+    assert_eq!(peeker.buffer().len(), peeker.remaining());
+
+    // truncate -> split -> reset interactions stay bounded to the truncated window.
+    let mut peeker = RefPeeker::new(&buf);
+    peeker.truncate(4);
+    let right = peeker.split_off(2);
+    assert_eq!(peeker.remaining(), 2);
+    assert_eq!(right.remaining(), 2); // [2, 4) after truncation, not [2, 5)
+    let mut left = peeker;
+    left.reset();
+    assert!(left.remaining() <= 2);
   }
 }

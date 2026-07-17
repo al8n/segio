@@ -233,6 +233,11 @@ impl<B> Putter<B> {
   /// This method will not clean the dirty state of the putter, which means
   /// any previously written data will still be present in the buffer. See also [`reset`](Putter::reset).
   ///
+  /// The restored limit is the **construction-time** limit, so calling this (or `reset`)
+  /// after `truncate_mut` re-widens the writable window past that truncation. This is a
+  /// deliberate divergence from `Peeker` / `RefPeeker`, whose `truncate` re-anchors the
+  /// reset target so a later `reset` stays within the truncated window.
+  ///
   /// # Examples
   ///
   /// ```rust
@@ -353,20 +358,42 @@ impl<B: ?Sized> Putter<B> {
       Bound::Unbounded => self.buf.remaining_mut(),
     }
   }
+
+  /// Computes the clamped half-open `[start, end)` view into the backing buffer
+  /// that is shared by both [`remaining_mut`](ChunkMut::remaining_mut) and
+  /// [`buffer_mut`](ChunkMut::buffer_mut).
+  ///
+  /// The end is clamped to the backing buffer's writable length and the start is
+  /// clamped to that end, guaranteeing `start <= end <= self.buf.remaining_mut()`.
+  /// This keeps `buffer_mut()` panic-free and upholds the
+  /// `buffer_mut().len() == remaining_mut()` invariant for every `(limit, range)`,
+  /// including inverted ranges. Returning owned `usize`s (rather than borrowing)
+  /// lets `buffer_mut` compute the bounds before taking its `&mut` slice.
+  #[inline]
+  fn view_bounds(&self) -> (usize, usize)
+  where
+    B: ChunkMut,
+  {
+    let inner = self.buf.remaining_mut();
+    let end = self.resolve_end_bound(self.limit).min(inner);
+    let start = self.cursor.min(end);
+    (start, end)
+  }
 }
 
 impl<B: ChunkMut + ?Sized> ChunkMut for Putter<B> {
   #[inline]
   fn remaining_mut(&self) -> usize {
-    let end_pos = self.resolve_end_bound(self.limit);
-    end_pos.saturating_sub(self.cursor)
+    let (start, end) = self.view_bounds();
+    end - start
   }
 
   #[inline]
   fn buffer_mut(&mut self) -> &mut [u8] {
-    let start = self.cursor.min(self.buf.remaining_mut());
-    let end_pos = self.resolve_end_bound(self.limit);
-    &mut self.buf.buffer_mut()[start..end_pos]
+    // Compute the clamped bounds before taking the `&mut` slice to satisfy the
+    // borrow checker (`view_bounds` borrows `&self`, then the borrow is released).
+    let (start, end) = self.view_bounds();
+    &mut self.buf.buffer_mut()[start..end]
   }
 
   #[inline]
@@ -388,6 +415,12 @@ impl<B: ChunkMut + ?Sized> ChunkMut for Putter<B> {
     Ok(())
   }
 
+  /// Narrows the writable window to at most `new_len` bytes from the current cursor.
+  ///
+  /// Only the current limit is tightened; the construction-time bound is left intact, so a
+  /// later `reset_position` / `reset` re-widens the window past this truncation. This is the
+  /// intentional divergence from `Peeker` / `RefPeeker`, whose `truncate` re-anchors the
+  /// reset target so a later `reset` stays within the truncated window.
   #[inline]
   fn truncate_mut(&mut self, new_len: usize) {
     let current_remaining = self.remaining_mut();
@@ -406,6 +439,7 @@ impl<B: ChunkMut + ?Sized> ChunkMut for Putter<B> {
 }
 
 #[cfg(test)]
+#[allow(clippy::reversed_empty_ranges)]
 mod tests {
   use super::*;
 
@@ -856,5 +890,70 @@ mod tests {
     assert_eq!(putter.position(), 1);
     putter.reset();
     assert_eq!(data[2], 0);
+  }
+
+  // Regression: `buffer_mut()` clamped only the start and sliced to the raw end,
+  // so inverted ranges panicked (`&mut buf[5..2]`) even though `remaining_mut()`
+  // reported 0. The clamped shared view must keep
+  // `buffer_mut().len() == remaining_mut()` and stay panic-free.
+  #[test]
+  fn test_putter_panic_safety_out_of_range_bounds() {
+    use crate::chunk_mut::ChunkMutExt; // brings `put_varint` into scope
+
+    let mut data = [0u8; 8];
+    let len = data.len(); // 8
+
+    // `with_limit` past the length (already clamped by `resolve_end_bound`, but
+    // assert the shared-view invariant regardless).
+    {
+      let mut p = Putter::with_limit(&mut data[..], len + 3);
+      assert_eq!(p.buffer_mut().len(), p.remaining_mut());
+      assert_eq!(p.remaining_mut(), len);
+      assert_eq!(p.put_slice_checked(&[]), Some(0));
+      assert!(p.try_advance_mut(p.remaining_mut()).is_ok());
+      assert!(p.try_advance_mut(1).is_err());
+    }
+
+    // Inverted range: empty, non-panicking view (previously panicked in
+    // `buffer_mut()` slicing `&mut buf[5..2]`).
+    {
+      let mut p = Putter::with_range(&mut data[..], 5..2);
+      assert_eq!(p.buffer_mut().len(), p.remaining_mut());
+      assert_eq!(p.remaining_mut(), 0);
+      assert_eq!(p.put_slice_checked(&[]), Some(0));
+      assert!(p.try_advance_mut(0).is_ok());
+      assert!(p.try_advance_mut(1).is_err());
+    }
+
+    // `..=usize::MAX`: end clamped to the backing writable length.
+    {
+      let mut p = Putter::with_range(&mut data[..], ..=usize::MAX);
+      assert_eq!(p.buffer_mut().len(), p.remaining_mut());
+      assert_eq!(p.remaining_mut(), len);
+      assert_eq!(p.put_slice_checked(&[]), Some(0));
+      assert!(p.try_advance_mut(len).is_ok());
+    }
+
+    // Explicit end past the backing length.
+    {
+      let mut p = Putter::with_range(&mut data[..], 0..(len + 5));
+      assert_eq!(p.buffer_mut().len(), p.remaining_mut());
+      assert_eq!(p.remaining_mut(), len);
+      assert_eq!(p.put_slice_checked(&[]), Some(0));
+      assert!(p.try_advance_mut(len).is_ok());
+    }
+
+    // Inverted range `5..3`: the writer methods that route through
+    // `buffer_mut()` (reset/fill/put_varint) must not panic on the empty view.
+    {
+      let mut p = Putter::with_range(&mut data[..], 5..3);
+      assert_eq!(p.remaining_mut(), 0);
+      assert_eq!(p.buffer_mut().len(), 0);
+      p.reset(); // reset_position() + fill(0) over the empty view
+      p.fill(0);
+      // `put_varint` needs >= 1 byte; on the empty view it must error, not panic.
+      assert!(p.put_varint(&1u8).is_err());
+      assert_eq!(p.put_slice_checked(&[]), Some(0));
+    }
   }
 }

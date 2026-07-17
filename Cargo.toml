@@ -27,7 +27,7 @@ thiserror = { version = "2", default-features = false }
 varing = { version = "0.14", default-features = false }
 paste = "1"
 
-bytes_1 = { package = "bytes", version = "1", default-features = false, optional = true }
+bytes_1 = { package = "bytes", version = "1.9", default-features = false, optional = true }
 
 [dev-dependencies]
 criterion = "0.8"
