@@ -1771,6 +1771,42 @@ pub trait Chunk {
   fn to_bytes_mut(&self) -> ::bytes_1::BytesMut {
     ::bytes_1::BytesMut::from(self.to_bytes())
   }
+
+  /// Converts the read buffer to a smol-bytes [`Bytes`](::smol_bytes_01::Bytes) instance.
+  ///
+  /// Creates a new `Bytes` instance containing a copy of all available bytes in the buffer.
+  /// The original buffer remains unchanged.
+  ///
+  /// # UTF-8 holders
+  ///
+  /// buffo intentionally does not implement [`Chunk`]/[`ChunkMut`] for smol-bytes' `Utf8*`
+  /// types, because exposing a raw `&mut [u8]` window would let a caller violate their
+  /// "always valid UTF-8" invariant. To work with the bytes of a `Utf8Bytes`, `Utf8BytesMut`,
+  /// or `Utf8Buffer`, obtain the underlying byte-level type with smol-bytes' `as_inner()` /
+  /// `into_inner()` and use [`Chunk`]/[`ChunkMut`] on that; re-entry to the `Utf8*` type
+  /// revalidates through smol-bytes' own fallible constructors.
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[cfg_attr(
+    docsrs,
+    doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+  )]
+  fn to_smol_bytes(&self) -> ::smol_bytes_01::Bytes {
+    ::smol_bytes_01::Bytes::copy_from_slice(self.buffer())
+  }
+
+  /// Converts the read buffer to a smol-bytes [`BytesMut`](::smol_bytes_01::BytesMut) instance.
+  ///
+  /// Creates a new `BytesMut` instance containing a copy of all available bytes in the buffer.
+  /// The original buffer remains unchanged.
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[cfg_attr(
+    docsrs,
+    doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+  )]
+  #[allow(clippy::wrong_self_convention)]
+  fn to_smol_bytes_mut(&self) -> ::smol_bytes_01::BytesMut {
+    ::smol_bytes_01::BytesMut::from(self.to_smol_bytes())
+  }
 }
 
 /// Extension trait for `Chunk` that provides additional methods
@@ -2462,6 +2498,393 @@ const _: () = {
   }
 };
 
+// smol-bytes: the heap-capable byte holders (`shared::Bytes`, `compact::Bytes`, `BytesMut`).
+// These only exist in smol's `std`/`alloc` tiers, and under those tiers smol re-exports
+// `bytes::Buf`, so the read specializations route through `smol_bytes_01::Buf` (NOT buffo's
+// own optional `bytes_1`, which may be disabled here).
+#[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+const _: () = {
+  use smol_bytes_01::{compact, Buf as _, Bytes, BytesMut};
+
+  macro_rules! read_fixed_specification {
+    ($($ty:ident), +$(,)?) => {
+      paste::paste! {
+        $(
+          fn [<read_ $ty _le>](&mut self) -> $ty {
+            self.[<get_ $ty _le>]()
+          }
+
+          fn [<read_ $ty _le_checked>](&mut self) -> Option<$ty> {
+            self.[<try_get_ $ty _le>]().ok()
+          }
+
+          fn [<try_read_ $ty _le>](&mut self) -> Result<$ty, TryReadError> {
+            self.[<try_get_ $ty _le>]().map_err(Into::into)
+          }
+
+          fn [<read_ $ty _be>](&mut self) -> $ty {
+            self.[<get_ $ty>]()
+          }
+
+          fn [<read_ $ty _be_checked>](&mut self) -> Option<$ty> {
+            self.[<try_get_ $ty>]().ok()
+          }
+
+          fn [<try_read_ $ty _be>](&mut self) -> Result<$ty, TryReadError> {
+            self.[<try_get_ $ty>]().map_err(Into::into)
+          }
+
+          fn [<read_ $ty _ne>](&mut self) -> $ty {
+            self.[<get_ $ty _ne>]()
+          }
+
+          fn [<read_ $ty _ne_checked>](&mut self) -> Option<$ty> {
+            self.[<try_get_ $ty _ne>]().ok()
+          }
+
+          fn [<try_read_ $ty _ne>](&mut self) -> Result<$ty, TryReadError> {
+            self.[<try_get_ $ty _ne>]().map_err(Into::into)
+          }
+        )*
+      }
+    };
+  }
+
+  // The immutable holders (`shared::Bytes` and `compact::Bytes`) share the same `Chunk` body;
+  // it is emitted once via this macro and invoked for each type. `remaining`/`buffer` map to
+  // the LEN-based accessors, so `buffer().len() == remaining()`. `advance`/`split_off`/
+  // `split_to`/`segment` all panic iff the argument exceeds `len`, matching smol's own bounds.
+  macro_rules! smol_immutable_chunk {
+    ($ty:ty, { $($extra:tt)* }) => {
+      #[cfg_attr(
+        docsrs,
+        doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+      )]
+      impl Chunk for $ty {
+        #[inline]
+        fn remaining(&self) -> usize {
+          <$ty>::len(self)
+        }
+
+        #[inline]
+        fn has_remaining(&self) -> bool {
+          !<$ty>::is_empty(self)
+        }
+
+        #[inline]
+        fn buffer(&self) -> &[u8] {
+          <$ty>::as_slice(self)
+        }
+
+        #[inline]
+        fn advance(&mut self, cnt: usize) {
+          smol_bytes_01::Buf::advance(self, cnt);
+        }
+
+        #[inline]
+        fn truncate(&mut self, len: usize) {
+          <$ty>::truncate(self, len);
+        }
+
+        #[inline]
+        fn segment(&self, range: impl RangeBounds<usize>) -> Self {
+          <$ty>::slice(self, range)
+        }
+
+        #[inline]
+        fn split_off(&mut self, at: usize) -> Self {
+          <$ty>::split_off(self, at)
+        }
+
+        #[inline]
+        fn split_to(&mut self, at: usize) -> Self {
+          <$ty>::split_to(self, at)
+        }
+
+        #[inline]
+        fn read_u8(&mut self) -> u8 {
+          self.get_u8()
+        }
+
+        #[inline]
+        fn read_u8_checked(&mut self) -> Option<u8> {
+          self.try_get_u8().ok()
+        }
+
+        #[inline]
+        fn try_read_u8(&mut self) -> Result<u8, TryReadError> {
+          self.try_get_u8().map_err(Into::into)
+        }
+
+        #[inline]
+        fn read_i8(&mut self) -> i8 {
+          self.get_i8()
+        }
+
+        #[inline]
+        fn read_i8_checked(&mut self) -> Option<i8> {
+          self.try_get_i8().ok()
+        }
+
+        #[inline]
+        fn try_read_i8(&mut self) -> Result<i8, TryReadError> {
+          self.try_get_i8().map_err(Into::into)
+        }
+
+        #[cfg(all(feature = "bytes_1", any(feature = "std", feature = "alloc")))]
+        fn to_bytes(&self) -> ::bytes_1::Bytes {
+          self.clone().into_bytes()
+        }
+
+        $($extra)*
+
+        read_fixed_specification!(u16, u32, u64, u128, i16, i32, i64, i128, f32, f64);
+      }
+    };
+  }
+
+  #[cfg_attr(
+    docsrs,
+    doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+  )]
+  impl EmptyChunk for Bytes {
+    /// ```rust
+    /// use buffo::{EmptyChunk, Chunk};
+    /// use smol_bytes_01::Bytes;
+    ///
+    /// let empty = Bytes::empty();
+    /// assert_eq!(empty.remaining(), 0);
+    /// assert!(!empty.has_remaining());
+    /// ```
+    #[inline]
+    fn empty() -> Self
+    where
+      Self: Sized,
+    {
+      Bytes::new()
+    }
+  }
+
+  #[cfg_attr(
+    docsrs,
+    doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+  )]
+  impl EmptyChunk for compact::Bytes {
+    /// ```rust
+    /// use buffo::{EmptyChunk, Chunk};
+    /// use smol_bytes_01::compact::Bytes;
+    ///
+    /// let empty = Bytes::empty();
+    /// assert_eq!(empty.remaining(), 0);
+    /// assert!(!empty.has_remaining());
+    /// ```
+    #[inline]
+    fn empty() -> Self
+    where
+      Self: Sized,
+    {
+      compact::Bytes::new()
+    }
+  }
+
+  // `shared::Bytes` clones into a `smol_bytes_01::Bytes` for free (it IS that type), so it
+  // overrides `to_smol_bytes` to avoid the copy. `compact::Bytes` keeps the default
+  // (`copy_from_slice`), which produces a `shared::Bytes` and preserves inline data.
+  smol_immutable_chunk!(Bytes, {
+    #[inline]
+    fn to_smol_bytes(&self) -> ::smol_bytes_01::Bytes {
+      self.clone()
+    }
+  });
+  smol_immutable_chunk!(compact::Bytes, {});
+
+  #[cfg_attr(
+    docsrs,
+    doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+  )]
+  impl EmptyChunk for BytesMut {
+    /// ```rust
+    /// use buffo::{EmptyChunk, Chunk};
+    /// use smol_bytes_01::BytesMut;
+    ///
+    /// let empty = BytesMut::empty();
+    /// assert_eq!(empty.remaining(), 0);
+    /// assert!(!empty.has_remaining());
+    /// ```
+    #[inline]
+    fn empty() -> Self
+    where
+      Self: Sized,
+    {
+      BytesMut::new()
+    }
+  }
+
+  #[cfg_attr(
+    docsrs,
+    doc(cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))))
+  )]
+  impl Chunk for BytesMut {
+    #[inline]
+    fn remaining(&self) -> usize {
+      BytesMut::len(self)
+    }
+
+    #[inline]
+    fn has_remaining(&self) -> bool {
+      !BytesMut::is_empty(self)
+    }
+
+    #[inline]
+    fn buffer(&self) -> &[u8] {
+      BytesMut::as_slice(self)
+    }
+
+    #[inline]
+    fn advance(&mut self, cnt: usize) {
+      smol_bytes_01::Buf::advance(self, cnt);
+    }
+
+    #[inline]
+    fn truncate(&mut self, len: usize) {
+      BytesMut::truncate(self, len);
+    }
+
+    // O(n) copy into an independent buffer, with bounds/panic behaviour delegated to the
+    // `&[u8]` impl so it panics iff the range exceeds `len`.
+    #[inline]
+    fn segment(&self, range: impl RangeBounds<usize>) -> Self {
+      let slice = BytesMut::as_slice(self);
+      BytesMut::from(<&[u8] as Chunk>::segment(&slice, range))
+    }
+
+    // smol's `BytesMut::split_off` panics only at `at > capacity`; the buffo contract is
+    // `at > len`. The pre-check restores that contract. `Err(inline)` is the inline-storage
+    // case (a small buffer split into a `Buffer`), NOT an error — map it to `BytesMut`.
+    #[inline]
+    fn split_off(&mut self, at: usize) -> Self {
+      check_out_of_bounds("split_off", at, BytesMut::len(self));
+      match BytesMut::split_off(self, at) {
+        Ok(tail) => tail,
+        Err(inline) => BytesMut::from(inline),
+      }
+    }
+
+    // smol's `BytesMut::split_to` already panics at `at > len`, so no pre-check is needed.
+    #[inline]
+    fn split_to(&mut self, at: usize) -> Self {
+      match BytesMut::split_to(self, at) {
+        Ok(head) => head,
+        Err(inline) => BytesMut::from(inline),
+      }
+    }
+
+    #[inline]
+    fn read_u8(&mut self) -> u8 {
+      self.get_u8()
+    }
+
+    #[inline]
+    fn read_u8_checked(&mut self) -> Option<u8> {
+      self.try_get_u8().ok()
+    }
+
+    #[inline]
+    fn try_read_u8(&mut self) -> Result<u8, TryReadError> {
+      self.try_get_u8().map_err(Into::into)
+    }
+
+    #[inline]
+    fn read_i8(&mut self) -> i8 {
+      self.get_i8()
+    }
+
+    #[inline]
+    fn read_i8_checked(&mut self) -> Option<i8> {
+      self.try_get_i8().ok()
+    }
+
+    #[inline]
+    fn try_read_i8(&mut self) -> Result<i8, TryReadError> {
+      self.try_get_i8().map_err(Into::into)
+    }
+
+    read_fixed_specification!(u16, u32, u64, u128, i16, i32, i64, i128, f32, f64);
+  }
+};
+
+// smol-bytes: the pure-core `Buffer` (works in no_std + no_alloc). It uses only inherent,
+// core-capable methods — in particular the inherent (safe) `Buffer::advance`, NOT
+// `bytes::Buf` and NOT the unsafe write-cursor `advance_mut`. No read/write specializations
+// are provided, so this impl is identical across core/alloc/std and never touches
+// `TryGetError` (whose identity varies in pure core).
+#[cfg(feature = "smol_bytes_01")]
+const _: () = {
+  use smol_bytes_01::Buffer;
+
+  #[cfg_attr(docsrs, doc(cfg(feature = "smol_bytes_01")))]
+  impl EmptyChunk for Buffer {
+    /// ```rust
+    /// use buffo::{EmptyChunk, Chunk};
+    /// use smol_bytes_01::Buffer;
+    ///
+    /// let empty = Buffer::empty();
+    /// assert_eq!(empty.remaining(), 0);
+    /// assert!(!empty.has_remaining());
+    /// ```
+    #[inline]
+    fn empty() -> Self
+    where
+      Self: Sized,
+    {
+      Buffer::new()
+    }
+  }
+
+  #[cfg_attr(docsrs, doc(cfg(feature = "smol_bytes_01")))]
+  impl Chunk for Buffer {
+    #[inline]
+    fn remaining(&self) -> usize {
+      Buffer::remaining(self)
+    }
+
+    #[inline]
+    fn has_remaining(&self) -> bool {
+      !Buffer::is_empty(self)
+    }
+
+    #[inline]
+    fn buffer(&self) -> &[u8] {
+      Buffer::as_slice(self)
+    }
+
+    #[inline]
+    fn advance(&mut self, cnt: usize) {
+      Buffer::advance(self, cnt);
+    }
+
+    #[inline]
+    fn truncate(&mut self, len: usize) {
+      Buffer::truncate(self, len);
+    }
+
+    #[inline]
+    fn segment(&self, range: impl RangeBounds<usize>) -> Self {
+      Buffer::slice(self, range)
+    }
+
+    #[inline]
+    fn split_off(&mut self, at: usize) -> Self {
+      Buffer::split_off(self, at)
+    }
+
+    #[inline]
+    fn split_to(&mut self, at: usize) -> Self {
+      Buffer::split_to(self, at)
+    }
+  }
+};
+
 #[inline]
 fn check_segment<R: RangeBounds<usize>>(
   range: R,
@@ -2790,12 +3213,12 @@ mod tests {
     let buf = [1, 2, 3, 4, 5];
     let slice = Wrapper(&buf[..]);
     let arr: [u8; 0] = slice.peek_array();
-    assert_eq!(arr, []);
+    assert_eq!(arr, [0u8; 0]);
 
     let buf = [];
     let slice = Wrapper(&buf[..]);
     let arr: [u8; 0] = slice.peek_array();
-    assert_eq!(arr, []);
+    assert_eq!(arr, [0u8; 0]);
   }
 
   #[test]
@@ -2819,17 +3242,17 @@ mod tests {
     let buf = [1, 2, 3, 4, 5];
     let slice = Wrapper(&buf[..]);
     let arr: [u8; 0] = slice.peek_array_at(2);
-    assert_eq!(arr, []);
+    assert_eq!(arr, [0u8; 0]);
 
     let buf = [1, 2, 3, 4, 5];
     let slice = Wrapper(&buf[..]);
     let arr: [u8; 0] = slice.peek_array_at(5);
-    assert_eq!(arr, []);
+    assert_eq!(arr, [0u8; 0]);
 
     let buf = [];
     let slice = Wrapper(&buf[..]);
     let arr: [u8; 0] = slice.peek_array_at(0);
-    assert_eq!(arr, []);
+    assert_eq!(arr, [0u8; 0]);
   }
 
   #[test]
@@ -2964,5 +3387,195 @@ mod tests {
       buf.try_peek_i8_at(2),
       Err(TryPeekAtError::OutOfBounds(_))
     ));
+  }
+
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[test]
+  fn smol_shared_bytes_chunk() {
+    use smol_bytes_01::Bytes;
+    // `alloc` is aliased as `std` in the no_std+alloc tier (see `lib.rs`), but the
+    // `vec!` macro still needs an explicit import into scope (unlike the real `std`
+    // prelude, `no_std` builds do not bring it in automatically).
+    use std::vec;
+
+    let mut buf = Bytes::from(vec![1u8, 2, 3, 4, 5]);
+    assert_eq!(Chunk::remaining(&buf), 5);
+    assert!(Chunk::has_remaining(&buf));
+    assert_eq!(Chunk::buffer(&buf), &[1, 2, 3, 4, 5]);
+    // coherence: buffer().len() == remaining()
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+
+    assert_eq!(buf.read_u8(), 1);
+    assert_eq!(buf.read_u16_be(), 0x0203);
+    assert_eq!(Chunk::remaining(&buf), 2);
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+    Chunk::advance(&mut buf, 1);
+    assert_eq!(Chunk::buffer(&buf), &[5]);
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+
+    let base = Bytes::from(b"hello world".to_vec());
+    assert_eq!(Chunk::segment(&base, 0..5).buffer(), b"hello");
+
+    let mut b2 = base.clone();
+    let tail = Chunk::split_off(&mut b2, 5);
+    assert_eq!(b2.buffer(), b"hello");
+    assert_eq!(tail.buffer(), b" world");
+
+    let mut b3 = base.clone();
+    let head = Chunk::split_to(&mut b3, 5);
+    assert_eq!(head.buffer(), b"hello");
+    assert_eq!(b3.buffer(), b" world");
+
+    let mut b4 = base.clone();
+    Chunk::truncate(&mut b4, 3);
+    assert_eq!(b4.buffer(), b"hel");
+
+    // to_smol_bytes on shared is a cheap clone; conversions round-trip the bytes.
+    assert_eq!(base.to_smol_bytes().buffer(), b"hello world");
+    assert_eq!(base.to_smol_bytes_mut().buffer(), b"hello world");
+
+    let e = <Bytes as EmptyChunk>::empty();
+    assert_eq!(Chunk::remaining(&e), 0);
+    assert!(!Chunk::has_remaining(&e));
+  }
+
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[test]
+  fn smol_compact_bytes_chunk() {
+    use smol_bytes_01::compact::Bytes;
+
+    let mut buf = Bytes::copy_from_slice([10u8, 20, 30, 40]);
+    assert_eq!(Chunk::remaining(&buf), 4);
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+    assert_eq!(buf.read_u8(), 10);
+    assert_eq!(buf.read_u8(), 20);
+    assert_eq!(Chunk::buffer(&buf), &[30, 40]);
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+
+    let seg = Chunk::segment(&buf, 0..1);
+    assert_eq!(seg.buffer(), &[30]);
+
+    let e = <Bytes as EmptyChunk>::empty();
+    assert_eq!(Chunk::remaining(&e), 0);
+  }
+
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[test]
+  fn smol_bytes_mut_split_inline_path() {
+    use smol_bytes_01::BytesMut;
+
+    // 11 bytes -> inline storage; smol's split returns `Err(Buffer)`, mapped to `BytesMut`.
+    let mut b = BytesMut::from(&b"hello world"[..]);
+    assert!(b.is_inline());
+    let tail = Chunk::split_off(&mut b, 5);
+    assert_eq!(Chunk::buffer(&b), b"hello");
+    assert_eq!(Chunk::buffer(&tail), b" world");
+
+    let mut b2 = BytesMut::from(&b"hello world"[..]);
+    assert!(b2.is_inline());
+    let head = Chunk::split_to(&mut b2, 5);
+    assert_eq!(Chunk::buffer(&head), b"hello");
+    assert_eq!(Chunk::buffer(&b2), b" world");
+  }
+
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[test]
+  fn smol_bytes_mut_split_heap_path() {
+    use smol_bytes_01::BytesMut;
+
+    let mut b = BytesMut::with_capacity(128);
+    b.extend_from_slice(b"hello world");
+    assert!(b.is_heap());
+    let tail = Chunk::split_off(&mut b, 5);
+    assert_eq!(Chunk::buffer(&b), b"hello");
+    assert_eq!(Chunk::buffer(&tail), b" world");
+
+    let mut b2 = BytesMut::with_capacity(128);
+    b2.extend_from_slice(b"hello world");
+    let head = Chunk::split_to(&mut b2, 5);
+    assert_eq!(Chunk::buffer(&head), b"hello");
+    assert_eq!(Chunk::buffer(&b2), b" world");
+  }
+
+  // Regression: buffo's `Chunk::split_off` must panic when `len < at <= capacity`. smol's own
+  // `BytesMut::split_off` would NOT panic there (its bound is capacity); the pre-check in
+  // buffo's impl restores the `at > len` contract.
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[test]
+  #[should_panic]
+  fn smol_bytes_mut_split_off_beyond_len_panics() {
+    use smol_bytes_01::BytesMut;
+
+    let mut b = BytesMut::with_capacity(128);
+    b.extend_from_slice(&[1, 2, 3, 4, 5]); // len 5, capacity >= 128
+    assert!(b.capacity() >= 10);
+    // 10 <= capacity but 10 > len(5): buffo must panic even though smol alone would not.
+    let _ = Chunk::split_off(&mut b, 10);
+  }
+
+  #[cfg(all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc")))]
+  #[test]
+  fn smol_bytes_mut_chunk_coherence() {
+    use smol_bytes_01::BytesMut;
+
+    let mut b = BytesMut::from(&b"abcdefgh"[..]);
+    assert_eq!(Chunk::remaining(&b), Chunk::buffer(&b).len());
+    assert_eq!(b.read_u32_be(), 0x61626364);
+    assert_eq!(Chunk::remaining(&b), Chunk::buffer(&b).len());
+    Chunk::advance(&mut b, 1);
+    assert_eq!(Chunk::buffer(&b), b"fgh");
+    assert_eq!(Chunk::remaining(&b), Chunk::buffer(&b).len());
+    Chunk::truncate(&mut b, 1);
+    assert_eq!(Chunk::buffer(&b), b"f");
+  }
+
+  #[cfg(feature = "smol_bytes_01")]
+  #[test]
+  fn smol_buffer_chunk() {
+    use smol_bytes_01::Buffer;
+
+    let mut buf = Buffer::try_from(&b"hello world"[..]).unwrap();
+    assert_eq!(Chunk::remaining(&buf), 11);
+    assert!(Chunk::has_remaining(&buf));
+    // coherence: buffer().len() == remaining()
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+
+    // read/peek use the trait defaults (Buffer has no specializations, never touches TryGetError)
+    assert_eq!(buf.peek_u8(), b'h');
+    assert_eq!(buf.read_u8(), b'h');
+    assert_eq!(Chunk::buffer(&buf), b"ello world");
+    assert_eq!(Chunk::remaining(&buf), Chunk::buffer(&buf).len());
+
+    let seg = Chunk::segment(&buf, 0..4);
+    assert_eq!(Chunk::buffer(&seg), b"ello");
+
+    let mut b2 = Buffer::try_from(&b"hello world"[..]).unwrap();
+    let tail = Chunk::split_off(&mut b2, 5);
+    assert_eq!(Chunk::buffer(&b2), b"hello");
+    assert_eq!(Chunk::buffer(&tail), b" world");
+
+    let mut b3 = Buffer::try_from(&b"hello world"[..]).unwrap();
+    let head = Chunk::split_to(&mut b3, 5);
+    assert_eq!(Chunk::buffer(&head), b"hello");
+    assert_eq!(Chunk::buffer(&b3), b" world");
+
+    Chunk::truncate(&mut buf, 3);
+    assert_eq!(Chunk::buffer(&buf), b"ell");
+
+    let e = <Buffer as EmptyChunk>::empty();
+    assert_eq!(Chunk::remaining(&e), 0);
+    assert!(!Chunk::has_remaining(&e));
+  }
+
+  // Buffer split_off/split_to panic iff `at > len` (exact match to smol's own bound; no
+  // pre-check required, unlike BytesMut).
+  #[cfg(feature = "smol_bytes_01")]
+  #[test]
+  #[should_panic]
+  fn smol_buffer_split_off_beyond_len_panics() {
+    use smol_bytes_01::Buffer;
+
+    let mut buf = Buffer::try_from(&[1u8, 2, 3][..]).unwrap();
+    let _ = Chunk::split_off(&mut buf, 4);
   }
 }
