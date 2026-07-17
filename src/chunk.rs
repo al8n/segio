@@ -35,7 +35,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -55,7 +55,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -78,7 +78,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -105,7 +105,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -125,7 +125,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -148,7 +148,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -178,7 +178,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -199,7 +199,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -223,7 +223,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -251,7 +251,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -271,7 +271,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -292,7 +292,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -318,7 +318,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -338,7 +338,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -359,7 +359,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -386,7 +386,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -407,7 +407,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -429,7 +429,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -462,7 +462,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -482,7 +482,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -506,7 +506,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -536,7 +536,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -556,7 +556,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -580,7 +580,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -613,7 +613,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -634,7 +634,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -659,7 +659,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -697,7 +697,7 @@ pub trait EmptyChunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, EmptyChunk};
+  /// use buffo::{Chunk, EmptyChunk};
   ///
   /// let empty_buf = <&[u8]>::empty();
   /// assert_eq!(empty_buf.remaining(), 0);
@@ -740,7 +740,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -762,7 +762,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -786,7 +786,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1u8, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -807,7 +807,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1u8, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -838,7 +838,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -862,7 +862,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   /// let slice = &buf[..];
@@ -882,7 +882,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   ///
@@ -912,7 +912,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   ///
@@ -934,7 +934,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   /// let slice = &buf[..];
@@ -964,7 +964,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -989,7 +989,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1020,7 +1020,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1042,7 +1042,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1074,7 +1074,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1113,7 +1113,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = b"hello world";
   /// let mut buf = &data[..];
@@ -1135,7 +1135,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1165,7 +1165,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1194,7 +1194,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3];
   /// let mut buf = &data[..];
@@ -1216,7 +1216,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1253,7 +1253,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -1288,7 +1288,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2, 3];
   /// let buf = &data[..];
@@ -1309,7 +1309,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let buf = &data[..];
@@ -1331,7 +1331,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let buf = &data[..];
@@ -1362,7 +1362,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2, 3];
   /// let buf = &data[..];
@@ -1384,7 +1384,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2];
   /// let buf = &data[..];
@@ -1411,7 +1411,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2];
   /// let buf = &data[..];
@@ -1452,7 +1452,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2, 3]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1473,7 +1473,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1493,7 +1493,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1519,7 +1519,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2, 3];
   /// let mut buf = &data[..];
@@ -1542,7 +1542,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let mut buf = &data[..];
@@ -1567,7 +1567,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let mut buf = &data[..];
@@ -1597,7 +1597,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2, 3]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1618,7 +1618,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let buf = &data[..];
@@ -1640,7 +1640,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let buf = &data[..];
@@ -1666,7 +1666,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2, 3]; // 255 as i8 is -1
   /// let mut buf = &data[..];
@@ -1687,7 +1687,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let mut buf = &data[..];
@@ -1710,7 +1710,7 @@ pub trait Chunk {
   ///
   /// # Examples
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let mut buf = &data[..];
@@ -1731,7 +1731,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -1789,7 +1789,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -1812,7 +1812,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let buf = &data[..];
@@ -1835,7 +1835,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let buf = &data[..];
@@ -1864,7 +1864,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5, 6, 7, 8];
   /// let buf = &data[..];
@@ -1887,7 +1887,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -1910,7 +1910,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -1940,7 +1940,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1964,7 +1964,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let mut buf = &data[..];
@@ -1992,7 +1992,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let mut buf = &data[..];
@@ -2048,7 +2048,7 @@ pub trait ChunkExt: Chunk {
   /// ## Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkExt, Chunk};
+  /// use buffo::{ChunkExt, Chunk};
   ///
   /// let buf = [0x96, 0x01]; // Varint encoding of 150
   /// let chunk = &buf[..];
@@ -2083,7 +2083,7 @@ pub trait ChunkExt: Chunk {
   /// ## Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkExt, Chunk};
+  /// use buffo::{ChunkExt, Chunk};
   ///
   /// let buf = [0, 0x96, 0x01]; // Varint encoding of 150
   /// let chunk = &buf[..];
@@ -2125,7 +2125,7 @@ pub trait ChunkExt: Chunk {
   /// ## Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkExt, Chunk};
+  /// use buffo::{ChunkExt, Chunk};
   ///
   /// let buf = [0x96, 0x01]; // Varint encoding of 150
   /// let mut chunk = &buf[..];
@@ -2349,7 +2349,7 @@ const _: () = {
   )]
   impl EmptyChunk for Bytes {
     /// ```rust
-    /// use bufkit::{EmptyChunk, Chunk};
+    /// use buffo::{EmptyChunk, Chunk};
     /// use bytes_1::Bytes;
     ///
     /// let empty = Bytes::empty();

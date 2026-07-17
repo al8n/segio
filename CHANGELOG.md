@@ -1,5 +1,41 @@
 # RELEASED
 
+## 0.8.0 (Jul 17th, 2026)
+
+Renamed the crate from `bufkit` to `buffo`. Bumped `varing` to `0.14`.
+
+### Fixed (soundness / panic-freedom)
+
+- The varint encoders (`put_varint`/`put_varint_at`/`write_varint`) now pre-flight
+  `encoded_len()` and fail without calling `encode`, so a value that does not fit no
+  longer partially overwrites the destination buffer on the error path (all-or-error).
+- `Peeker`, `RefPeeker`, and `Putter` clamp the view end bound, so an out-of-range,
+  inverted, or unbounded limit no longer makes `remaining()` over-report or
+  `buffer()`/`buffer_mut()` panic inside the non-panicking (`_checked`/`try_*`) APIs.
+- `From<bytes::TryGetError>` is now total instead of panicking in release inside
+  error-conversion paths.
+
+### Changed
+
+- `io::ErrorKind` mapping is now variant-explicit and consistent across read and write
+  (`OutOfBounds` -> `InvalidInput`, `InsufficientSpace` -> `WriteZero`).
+- `try_peek_u8_at`/`try_peek_i8_at` report `InsufficientData` (not `OutOfBounds`) at
+  `offset == len`, matching the other `*_at` methods.
+- `OutOfBounds::excess()` saturates instead of overflowing.
+- The untyped varint scan (`try_scan_varint`/`try_scan_varint_at`/`try_consume_varint`)
+  is documented as a structural skip; it does not bound the value to a type width. Use
+  the typed `read_varint`/`peek_varint` for type-bounded decoding.
+
+### Added
+
+- `DecodeVarintAtError::Overflow`, so the varint overflow signal is preserved rather
+  than flattened into an opaque error.
+
+### Fixed (build)
+
+- Corrected the `bytes` dependency floor to `1.9` (`try_get_*`/`TryGetError`) and the
+  `test_to_bytes` cfg gate (`--no-default-features --features bytes_1` now compiles).
+
 ## 0.5.1 (Aug 21st, 2025)
 
 - Fix typo in README
@@ -13,7 +49,7 @@
 
 ## 0.4.0 (Aug 11st, 2025)
 
-- Rename `bufkit::{Buf, BufMut}` to `bufkit::{Chunk, ChunkMut}` to avoid collisions with `bytes::{Buf, BufMut}`.
+- Rename `buffo::{Buf, BufMut}` to `buffo::{Chunk, ChunkMut}` to avoid collisions with `bytes::{Buf, BufMut}`.
 
 ## 0.3.0 (Aug 8th, 2025)
 

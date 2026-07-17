@@ -19,7 +19,7 @@ use super::{check_out_of_bounds, must_non_zero, panic_advance, Chunk};
 /// # Examples
 ///
 /// ```rust
-/// use bufkit::{Chunk, Peeker};
+/// use buffo::{Chunk, Peeker};
 ///
 /// let data = b"Hello, World!";
 /// let buf = &data[..];
@@ -79,7 +79,7 @@ impl<B> Peeker<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -99,7 +99,7 @@ impl<B> Peeker<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -120,7 +120,7 @@ impl<B> Peeker<B> {
   ///
   /// ```rust
   /// use core::ops::Bound;
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -147,7 +147,7 @@ impl<B> Peeker<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -174,7 +174,7 @@ impl<B> Peeker<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -203,7 +203,7 @@ impl<B> Peeker<B> {
   ///
   /// ```rust
   /// use core::ops::Bound;
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -223,7 +223,7 @@ impl<B> Peeker<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -250,7 +250,7 @@ impl<B> Peeker<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, Peeker};
+  /// use buffo::{Chunk, Peeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -336,7 +336,7 @@ impl<B> Peeker<B> {
 
 impl<B: EmptyChunk> EmptyChunk for Peeker<B> {
   /// ```rust
-  /// use bufkit::{Chunk, EmptyChunk, Peeker};
+  /// use buffo::{Chunk, EmptyChunk, Peeker};
   ///
   /// let empty_peeker = Peeker::<&[u8]>::empty();
   /// assert_eq!(empty_peeker.remaining(), 0);

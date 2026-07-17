@@ -23,7 +23,7 @@ use super::{
 /// # Examples
 ///
 /// ```rust
-/// use bufkit::{ChunkMut, Putter};
+/// use buffo::{ChunkMut, Putter};
 ///
 /// let mut data = [0u8; 10];
 /// let mut putter = Putter::new(&mut data[..]);  // No need for &mut &mut
@@ -58,7 +58,7 @@ impl<B: ChunkMut> From<B> for Putter<B> {
 
 impl<B: EmptyChunk> EmptyChunk for Putter<B> {
   /// ```rust
-  /// use bufkit::{EmptyChunk, ChunkMut, Putter};
+  /// use buffo::{EmptyChunk, ChunkMut, Putter};
   ///
   /// let mut slice = <Putter<&mut [u8]>>::empty();
   /// assert_eq!(slice.remaining_mut(), 0);
@@ -79,7 +79,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let putter = Putter::new(&mut data[..]);
@@ -98,7 +98,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let mut slice: &mut [u8] = &mut data[..];
@@ -119,7 +119,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let putter = Putter::with_limit(&mut data[..], 5); // Only write first 5 bytes
@@ -139,7 +139,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let putter = Putter::const_with_limit((&mut data[..]).into(), 5); // Only write first 5 bytes
@@ -159,7 +159,7 @@ impl<B> Putter<B> {
   ///
   /// ```rust
   /// use core::ops::Bound;
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   ///
@@ -186,7 +186,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let mut putter = Putter::new(&mut data[..]);
@@ -211,7 +211,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   /// use core::ops::Bound;
   ///
   /// let mut data = [0u8; 10];
@@ -241,7 +241,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let mut putter = Putter::new(&mut data[..]);
@@ -267,7 +267,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let mut putter = Putter::new(&mut data[..]);
@@ -294,7 +294,7 @@ impl<B> Putter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, Putter};
+  /// use buffo::{ChunkMut, Putter};
   ///
   /// let mut data = [0u8; 10];
   /// let mut putter = Putter::new(&mut data[..]);

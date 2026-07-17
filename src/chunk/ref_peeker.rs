@@ -19,7 +19,7 @@ use super::{check_out_of_bounds, must_non_zero, panic_advance, Chunk};
 /// # Examples
 ///
 /// ```rust
-/// use bufkit::{Chunk, RefPeeker};
+/// use buffo::{Chunk, RefPeeker};
 ///
 /// let data = b"Hello, World!";
 /// let buf = &data[..];
@@ -73,7 +73,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -93,7 +93,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -114,7 +114,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   ///
   /// ```rust
   /// use core::ops::Bound;
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -144,7 +144,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   ///
   /// ```rust
   /// use core::ops::Bound;
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -163,7 +163,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -190,7 +190,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -217,7 +217,7 @@ impl<'a, B: 'a + ?Sized> RefPeeker<'a, B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, RefPeeker};
+  /// use buffo::{Chunk, RefPeeker};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];

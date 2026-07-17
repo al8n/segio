@@ -132,7 +132,7 @@ impl From<TryPeekError> for TryReadError {
 /// # Examples
 ///
 /// ```rust
-/// # use bufkit::Chunk;
+/// # use buffo::Chunk;
 /// let data = b"Hello";
 /// let buf = &data[..];
 ///
@@ -235,7 +235,7 @@ impl From<TrySegmentError> for std::io::Error {
 /// # Example
 ///
 /// ```rust
-/// # use bufkit::ChunkMut;
+/// # use buffo::ChunkMut;
 /// let mut buf = [0u8; 10];
 /// let mut writer = &mut buf[..];
 ///

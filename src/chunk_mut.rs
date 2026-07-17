@@ -30,7 +30,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -53,7 +53,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -75,7 +75,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -101,7 +101,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -124,7 +124,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -146,7 +146,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -175,7 +175,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -199,7 +199,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -222,7 +222,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -248,7 +248,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -272,7 +272,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -298,7 +298,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -327,7 +327,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -351,7 +351,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -377,7 +377,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -409,7 +409,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -434,7 +434,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -461,7 +461,7 @@ macro_rules! put_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -593,7 +593,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -616,7 +616,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -642,7 +642,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -671,7 +671,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -694,7 +694,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -720,7 +720,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -752,7 +752,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -776,7 +776,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -803,7 +803,7 @@ macro_rules! write_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::ChunkMut;
+        /// use buffo::ChunkMut;
         ///
         /// let mut buf = [0u8; 24];
         /// let mut slice = &mut buf[..];
@@ -905,7 +905,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -928,7 +928,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -944,7 +944,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   ///
@@ -969,7 +969,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4];
   /// let mut slice = &mut buf[..];
@@ -992,7 +992,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut data = [1u8, 2, 3, 4, 5];
   /// let mut buf = &mut data[..];
@@ -1014,7 +1014,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut data = [1u8, 2, 3, 4, 5];
   /// let mut buf = &mut data[..];
@@ -1053,7 +1053,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut data = [1, 2, 3, 4, 5];
   /// let mut buf = &mut data[..];
@@ -1073,7 +1073,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut data = [1, 2, 3, 4, 5];
   /// let mut buf = &mut data[..];
@@ -1101,7 +1101,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4];
   /// let mut slice = &mut buf[..];
@@ -1125,7 +1125,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   /// let mut slice = &mut buf[..];
@@ -1145,7 +1145,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   /// let mut slice = &mut buf[..];
@@ -1175,7 +1175,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   /// let mut slice = &mut buf[..];
@@ -1196,7 +1196,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   /// let mut slice = &mut buf[..];
@@ -1225,7 +1225,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   /// let mut slice = &mut buf[..];
@@ -1245,7 +1245,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [1, 2, 3, 4, 5];
   /// let mut slice = &mut buf[..];
@@ -1271,7 +1271,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1294,7 +1294,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1326,7 +1326,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1366,7 +1366,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1388,7 +1388,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 1];
   /// let mut slice = &mut buf[..];
@@ -1416,7 +1416,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1438,7 +1438,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 1];
   ///
@@ -1463,7 +1463,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1490,7 +1490,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1521,7 +1521,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1543,7 +1543,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1574,7 +1574,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1613,7 +1613,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1636,7 +1636,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1672,7 +1672,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1725,7 +1725,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1746,7 +1746,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 1];
   /// let mut slice = &mut buf[..];
@@ -1773,7 +1773,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1794,7 +1794,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 1];
   ///
@@ -1820,7 +1820,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1841,7 +1841,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1866,7 +1866,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1887,7 +1887,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1910,7 +1910,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1936,7 +1936,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 5];
   /// let mut slice = &mut buf[..];
@@ -1962,7 +1962,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -1987,7 +1987,7 @@ pub trait ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::ChunkMut;
+  /// use buffo::ChunkMut;
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -2016,7 +2016,7 @@ pub trait ChunkMutExt: ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, ChunkMutExt};
+  /// use buffo::{ChunkMut, ChunkMutExt};
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -2061,7 +2061,7 @@ pub trait ChunkMutExt: ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, ChunkMutExt};
+  /// use buffo::{ChunkMut, ChunkMutExt};
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -2124,7 +2124,7 @@ pub trait ChunkMutExt: ChunkMut {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, ChunkMutExt};
+  /// use buffo::{ChunkMut, ChunkMutExt};
   ///
   /// let mut buf = [0u8; 24];
   /// let mut slice = &mut buf[..];
@@ -2385,7 +2385,7 @@ const _: () = {
 
   impl<T: EmptyChunk> EmptyChunk for std::boxed::Box<T> {
     /// ```rust
-    /// use bufkit::{EmptyChunk, ChunkMut};
+    /// use buffo::{EmptyChunk, ChunkMut};
     ///
     /// let mut slice = <Box<&mut [u8]>>::empty();
     /// assert_eq!(slice.remaining_mut(), 0);
@@ -2403,7 +2403,7 @@ const _: () = {
 
 impl EmptyChunk for &mut [u8] {
   /// ```rust
-  /// use bufkit::{EmptyChunk, ChunkMut};
+  /// use buffo::{EmptyChunk, ChunkMut};
   ///
   /// let mut slice = <&mut [u8]>::empty();
   /// assert_eq!(slice.remaining_mut(), 0);
@@ -2475,7 +2475,7 @@ impl ChunkMut for &mut [u8] {
 /// naturally without extra reference wrapping:
 ///
 /// ```rust,ignore
-/// use bufkit::{ChunkMut, ChunkWriter};
+/// use buffo::{ChunkMut, ChunkWriter};
 ///
 /// // Instead of this awkward signature:
 /// fn encode_bad<B: ChunkMut>(buf: &mut B) { /* ... */ }
@@ -2495,7 +2495,7 @@ impl ChunkMut for &mut [u8] {
 /// various buffer types:
 ///
 /// ```rust,ignore
-/// use bufkit::{ChunkMut, ChunkWriter};
+/// use buffo::{ChunkMut, ChunkWriter};
 ///
 /// pub trait Encode {
 ///     fn encode<B: ChunkMut>(&self, buf: impl Into<ChunkWriter<B>>) -> Result<usize, Error>;
@@ -2549,7 +2549,7 @@ impl<B: ?Sized> core::ops::DerefMut for ChunkWriter<B> {
 
 impl<B: EmptyChunk> EmptyChunk for ChunkWriter<B> {
   /// ```rust
-  /// use bufkit::{EmptyChunk, ChunkMut, ChunkWriter};
+  /// use buffo::{EmptyChunk, ChunkMut, ChunkWriter};
   ///
   /// let mut slice = <ChunkWriter<&mut [u8]>>::empty();
   /// assert_eq!(slice.remaining_mut(), 0);
@@ -2574,7 +2574,7 @@ impl<B: ?Sized> ChunkWriter<B> {
   /// # Example
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, ChunkWriter};
+  /// use buffo::{ChunkMut, ChunkWriter};
   ///
   /// let mut buf = [0u8; 24];
   /// let mut write_buf = ChunkWriter::from(&mut buf[..]);
@@ -2590,7 +2590,7 @@ impl<B: ?Sized> ChunkWriter<B> {
   /// # Example
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, ChunkWriter};
+  /// use buffo::{ChunkMut, ChunkWriter};
   ///
   /// let mut buf = [0u8; 24];
   /// let write_buf = ChunkWriter::from(&mut buf[..]);
@@ -2614,7 +2614,7 @@ impl<B> ChunkWriter<B> {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkMut, ChunkWriter};
+  /// use buffo::{ChunkMut, ChunkWriter};
   ///
   /// let mut buf = [0u8; 24];
   /// let mut write_buf = ChunkWriter::from(&mut buf[..]);
