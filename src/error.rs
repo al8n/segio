@@ -132,7 +132,7 @@ impl From<TryPeekError> for TryReadError {
 /// # Examples
 ///
 /// ```rust
-/// # use bufkit::Chunk;
+/// # use buffo::Chunk;
 /// let data = b"Hello";
 /// let buf = &data[..];
 ///
@@ -162,7 +162,8 @@ impl TrySegmentError {
   ///
   /// # Panics
   ///
-  /// In debug builds, panics if the range is valid (would not be an error) or the available bytes are less than the requested range.
+  /// In debug builds, panics if the range is valid (`start <= end && end <= available`),
+  /// since that would not represent an error condition.
   #[inline]
   pub const fn new(start: usize, end: usize, available: usize) -> Self {
     debug_assert!(
@@ -234,7 +235,7 @@ impl From<TrySegmentError> for std::io::Error {
 /// # Example
 ///
 /// ```rust
-/// # use bufkit::ChunkMut;
+/// # use buffo::ChunkMut;
 /// let mut buf = [0u8; 10];
 /// let mut writer = &mut buf[..];
 ///
@@ -280,10 +281,11 @@ impl OutOfBounds {
 
   /// Returns how far beyond the buffer the offset extends.
   ///
-  /// This is equivalent to `offset() - length() + 1`.
+  /// This is equivalent to `offset() - length() + 1`, saturating at
+  /// `usize::MAX` instead of overflowing at the maximal boundary.
   #[inline]
   pub const fn excess(&self) -> usize {
-    self.offset() - self.length() + 1
+    self.offset.saturating_sub(self.length).saturating_add(1)
   }
 }
 
@@ -460,11 +462,6 @@ impl TryPeekAtError {
   }
 
   /// Creates a new `TryPeekAtError::InsufficientData` error.
-  ///
-  /// # Panics
-  ///
-  /// - In debug builds, panics if `requested <= available` (would not be an error).
-  /// - The `requested` value must be a non-zero.
   #[inline]
   pub const fn insufficient_data(available: usize, offset: usize) -> Self {
     Self::InsufficientData(InsufficientDataAt::new(available, offset))
@@ -474,8 +471,8 @@ impl TryPeekAtError {
   ///
   /// # Panics
   ///
-  /// - In debug builds, panics if `requested <= available` (would not be an error).
-  /// - The `requested` value must be a non-zero.
+  /// Panics (in all build profiles) if `requested <= available`, since that would
+  /// not represent an error condition.
   #[inline]
   pub const fn insufficient_data_with_requested(
     available: usize,
@@ -491,7 +488,15 @@ impl TryPeekAtError {
 #[cfg(feature = "std")]
 impl From<TryPeekAtError> for std::io::Error {
   fn from(e: TryPeekAtError) -> Self {
-    std::io::Error::new(std::io::ErrorKind::UnexpectedEof, e)
+    // Variant-explicit, mirroring the write-side `TryPutAtError`: an out-of-range offset
+    // is `InvalidInput` (a caller mistake), while a valid offset with too few bytes is
+    // `UnexpectedEof` (short data).
+    match e {
+      TryPeekAtError::OutOfBounds(e) => std::io::Error::new(std::io::ErrorKind::InvalidInput, e),
+      TryPeekAtError::InsufficientData(e) => {
+        std::io::Error::new(std::io::ErrorKind::UnexpectedEof, e)
+      }
+    }
   }
 }
 
@@ -520,8 +525,8 @@ impl TryPutAtError {
   ///
   /// # Panics
   ///
-  /// - In debug builds, panics if `requested <= available` (would not be an error).
-  /// - The `requested` value must be a non-zero.
+  /// Panics (in all build profiles) if `requested <= available`, since that would
+  /// not represent an error condition.
   #[inline]
   pub const fn insufficient_space(
     requested: NonZeroUsize,
@@ -537,13 +542,7 @@ impl From<TryPutAtError> for std::io::Error {
   fn from(e: TryPutAtError) -> Self {
     match e {
       TryPutAtError::OutOfBounds(e) => std::io::Error::new(std::io::ErrorKind::InvalidInput, e),
-      TryPutAtError::InsufficientSpace(e) => {
-        if e.offset() >= e.available() {
-          std::io::Error::new(std::io::ErrorKind::InvalidInput, e)
-        } else {
-          std::io::Error::new(std::io::ErrorKind::WriteZero, e)
-        }
-      }
+      TryPutAtError::InsufficientSpace(e) => std::io::Error::new(std::io::ErrorKind::WriteZero, e),
     }
   }
 }
@@ -643,11 +642,7 @@ impl From<EncodeVarintAtError> for std::io::Error {
         std::io::Error::new(std::io::ErrorKind::InvalidInput, e)
       }
       EncodeVarintAtError::InsufficientSpace(e) => {
-        if e.offset() >= e.available() {
-          std::io::Error::new(std::io::ErrorKind::InvalidInput, e)
-        } else {
-          std::io::Error::new(std::io::ErrorKind::WriteZero, e)
-        }
+        std::io::Error::new(std::io::ErrorKind::WriteZero, e)
       }
       EncodeVarintAtError::Other(msg) => std::io::Error::other(msg),
     }
@@ -664,6 +659,9 @@ pub enum DecodeVarintAtError {
   /// The buffer does not have enough capacity to encode the value.
   #[error(transparent)]
   InsufficientData(#[from] InsufficientDataAt),
+  /// The decoded value would overflow the target type.
+  #[error("decoded value would overflow the target type")]
+  Overflow,
   /// A custom error message.
   #[error("{0}")]
   #[cfg(not(any(feature = "std", feature = "alloc")))]
@@ -683,11 +681,6 @@ impl DecodeVarintAtError {
   }
 
   /// Creates a new `DecodeVarintAtError::Insufficient` error.
-  ///
-  /// # Panics
-  ///
-  /// - In debug builds, panics if `requested <= available` (would not be an error).
-  /// - The `requested` value must be a non-zero.
   #[inline]
   pub const fn insufficient_data(available: usize, offset: usize) -> Self {
     Self::InsufficientData(InsufficientDataAt::new(available, offset))
@@ -697,7 +690,15 @@ impl DecodeVarintAtError {
   #[inline]
   pub fn from_varint_error(err: DecodeVarintError, offset: usize) -> Self {
     match err {
-      DecodeVarintError::InsufficientData(e) => Self::insufficient_data(e.available(), offset),
+      DecodeVarintError::InsufficientData(e) => match e.required() {
+        Some(requested) => Self::InsufficientData(InsufficientDataAt::with_requested(
+          e.available(),
+          offset,
+          requested,
+        )),
+        None => Self::insufficient_data(e.available(), offset),
+      },
+      DecodeVarintError::Overflow => Self::Overflow,
       DecodeVarintError::Other(msg) => Self::other(msg),
       _ => Self::other("unknown error"),
     }
@@ -707,7 +708,15 @@ impl DecodeVarintAtError {
   #[inline]
   pub const fn from_const_varint_error(err: ConstDecodeVarintError, offset: usize) -> Self {
     match err {
-      ConstDecodeVarintError::InsufficientData(e) => Self::insufficient_data(e.available(), offset),
+      ConstDecodeVarintError::InsufficientData(e) => match e.required() {
+        Some(requested) => Self::InsufficientData(InsufficientDataAt::with_requested(
+          e.available(),
+          offset,
+          requested,
+        )),
+        None => Self::insufficient_data(e.available(), offset),
+      },
+      ConstDecodeVarintError::Overflow => Self::Overflow,
       #[cfg(not(any(feature = "std", feature = "alloc")))]
       ConstDecodeVarintError::Other(msg) => Self::Other(msg),
       #[cfg(any(feature = "std", feature = "alloc"))]
@@ -738,6 +747,13 @@ impl DecodeVarintAtError {
 impl From<DecodeVarintAtError> for std::io::Error {
   fn from(e: DecodeVarintAtError) -> Self {
     match e {
+      // Variant-explicit: an out-of-range offset is a caller mistake (`InvalidInput`), not
+      // EOF, so it must not fall through the `_ => UnexpectedEof` wildcard below. This
+      // mirrors the write-side `EncodeVarintAtError`.
+      DecodeVarintAtError::OutOfBounds(e) => {
+        std::io::Error::new(std::io::ErrorKind::InvalidInput, e)
+      }
+      DecodeVarintAtError::Overflow => std::io::Error::new(std::io::ErrorKind::InvalidData, e),
       DecodeVarintAtError::Other(msg) => std::io::Error::other(msg),
       _ => std::io::Error::new(std::io::ErrorKind::UnexpectedEof, e),
     }
@@ -748,21 +764,199 @@ impl From<DecodeVarintAtError> for std::io::Error {
 const _: () = {
   use bytes_1::TryGetError;
 
+  // Normalizes a `(requested, available)` pair taken from `bytes::TryGetError` so that
+  // it always satisfies the `requested >= 1` and `requested > available` invariants of
+  // these error types. `bytes::TryGetError` exposes public `requested`/`available`
+  // fields, so any pair (including `requested == 0` or `requested <= available`) is
+  // constructible; degenerate pairs are normalized here rather than panicked on, while
+  // valid non-degenerate inputs are preserved verbatim.
+  #[inline]
+  fn normalize(requested: usize, available: usize) -> (NonZeroUsize, usize) {
+    match NonZeroUsize::new(requested) {
+      Some(requested) if requested.get() > available => (requested, available),
+      _ => {
+        // A valid error cannot have `available == usize::MAX` (no larger `requested`
+        // exists), so clamp it down by one in that single case to keep the invariant
+        // satisfiable; then `available + 1` is non-zero and strictly greater.
+        let available = available.min(usize::MAX - 1);
+        let requested = NonZeroUsize::new(available + 1).unwrap_or(NonZeroUsize::MIN);
+        (requested, available)
+      }
+    }
+  }
+
   impl From<TryGetError> for TryAdvanceError {
     fn from(e: TryGetError) -> Self {
-      TryAdvanceError::new(
-        NonZeroUsize::new(e.requested).expect("requested must be non-zero"),
-        e.available,
-      )
+      let (requested, available) = normalize(e.requested, e.available);
+      TryAdvanceError::new(requested, available)
     }
   }
 
   impl From<TryGetError> for TryReadError {
     fn from(e: TryGetError) -> Self {
-      TryReadError::new(
-        NonZeroUsize::new(e.requested).expect("requested must be non-zero"),
-        e.available,
-      )
+      let (requested, available) = normalize(e.requested, e.available);
+      TryReadError::new(requested, available)
     }
   }
 };
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use core::num::NonZeroUsize;
+
+  // Fix 2: `OutOfBounds::excess()` must be total (saturating) — no overflow/underflow
+  // in debug or release, including the reachable `try_split_off(usize::MAX)` boundary.
+  #[test]
+  fn out_of_bounds_excess_is_total() {
+    use crate::Chunk;
+
+    let vals = [0usize, 1, usize::MAX];
+    for &offset in &vals {
+      for &length in &vals {
+        // `OutOfBounds::new` requires `offset >= length`.
+        if offset >= length {
+          let e = OutOfBounds::new(offset, length);
+          assert_eq!(e.excess(), offset.saturating_sub(length).saturating_add(1));
+        }
+      }
+    }
+
+    // Reachable in-crate: splitting an empty buffer at `usize::MAX` yields
+    // `OutOfBounds { offset: usize::MAX, length: 0 }`; `excess()` must saturate.
+    let mut buf = &b""[..];
+    let err = buf.try_split_off(usize::MAX).unwrap_err();
+    assert_eq!(err.offset(), usize::MAX);
+    assert_eq!(err.length(), 0);
+    assert_eq!(err.excess(), usize::MAX);
+  }
+
+  // Fix 3: varint `Overflow` must map to a dedicated `Overflow` variant, not `Other`.
+  #[test]
+  fn decode_varint_at_error_maps_overflow() {
+    assert!(matches!(
+      DecodeVarintAtError::from_varint_error(DecodeVarintError::Overflow, 4),
+      DecodeVarintAtError::Overflow
+    ));
+    assert!(matches!(
+      DecodeVarintAtError::from_const_varint_error(ConstDecodeVarintError::Overflow, 4),
+      DecodeVarintAtError::Overflow
+    ));
+  }
+
+  // Fix 6: a source carrying `required = Some(n)` must preserve it as `requested() == Some(n)`.
+  #[test]
+  fn decode_varint_at_error_preserves_required() {
+    let n = NonZeroUsize::new(10).unwrap();
+
+    // varing enforces `required > available` at construction (here 10 > 3).
+    match DecodeVarintAtError::from_varint_error(
+      DecodeVarintError::insufficient_data_with_required(n, 3),
+      7,
+    ) {
+      DecodeVarintAtError::InsufficientData(inner) => {
+        assert_eq!(inner.requested(), Some(n));
+        assert_eq!(inner.available(), 3);
+        assert_eq!(inner.offset(), 7);
+      }
+      other => panic!("expected InsufficientData, got {other:?}"),
+    }
+
+    match DecodeVarintAtError::from_const_varint_error(
+      ConstDecodeVarintError::insufficient_data_with_required(n, 3),
+      7,
+    ) {
+      DecodeVarintAtError::InsufficientData(inner) => {
+        assert_eq!(inner.requested(), Some(n));
+      }
+      other => panic!("expected InsufficientData, got {other:?}"),
+    }
+
+    // Without a known `required`, `requested()` stays `None`.
+    match DecodeVarintAtError::from_varint_error(DecodeVarintError::insufficient_data(2), 1) {
+      DecodeVarintAtError::InsufficientData(inner) => {
+        assert_eq!(inner.requested(), None);
+        assert_eq!(inner.available(), 2);
+      }
+      other => panic!("expected InsufficientData, got {other:?}"),
+    }
+  }
+
+  // Fixes 3 + 4: `io::ErrorKind` mapping is a function of the variant only.
+  #[cfg(feature = "std")]
+  #[test]
+  fn io_error_kind_mapping() {
+    use std::io::ErrorKind;
+
+    // Fix 3: Overflow -> InvalidData (malformed data, not EOF).
+    let err: std::io::Error =
+      DecodeVarintAtError::from_varint_error(DecodeVarintError::Overflow, 0).into();
+    assert_eq!(err.kind(), ErrorKind::InvalidData);
+
+    let nz = NonZeroUsize::new(4).unwrap();
+
+    // Fix 4: InsufficientSpace -> WriteZero unconditionally. The `offset >= available`
+    // case (5 >= 1) previously mapped to InvalidInput; it must now stay WriteZero.
+    let err: std::io::Error = TryPutAtError::insufficient_space(nz, 1, 0).into();
+    assert_eq!(err.kind(), ErrorKind::WriteZero);
+    let err: std::io::Error = TryPutAtError::insufficient_space(nz, 1, 5).into();
+    assert_eq!(err.kind(), ErrorKind::WriteZero);
+    let err: std::io::Error = EncodeVarintAtError::insufficient_space(nz, 1, 0).into();
+    assert_eq!(err.kind(), ErrorKind::WriteZero);
+    let err: std::io::Error = EncodeVarintAtError::insufficient_space(nz, 1, 5).into();
+    assert_eq!(err.kind(), ErrorKind::WriteZero);
+
+    // OutOfBounds -> InvalidInput on both write-side wrappers.
+    let err: std::io::Error = TryPutAtError::out_of_bounds(9, 4).into();
+    assert_eq!(err.kind(), ErrorKind::InvalidInput);
+    let err: std::io::Error = EncodeVarintAtError::out_of_bounds(9, 4).into();
+    assert_eq!(err.kind(), ErrorKind::InvalidInput);
+
+    // Read side (variant-explicit, mirroring the write side): OutOfBounds -> InvalidInput,
+    // InsufficientData -> UnexpectedEof.
+    let err: std::io::Error = TryPeekAtError::out_of_bounds(9, 4).into();
+    assert_eq!(err.kind(), ErrorKind::InvalidInput);
+    let err: std::io::Error = TryPeekAtError::insufficient_data(0, 4).into();
+    assert_eq!(err.kind(), ErrorKind::UnexpectedEof);
+    let err: std::io::Error = DecodeVarintAtError::out_of_bounds(9, 4).into();
+    assert_eq!(err.kind(), ErrorKind::InvalidInput);
+    let err: std::io::Error = DecodeVarintAtError::insufficient_data(0, 4).into();
+    assert_eq!(err.kind(), ErrorKind::UnexpectedEof);
+  }
+
+  // Fix 1: `From<bytes::TryGetError>` must be total — never panics for any field values,
+  // and preserves fields verbatim on valid (requested >= 1 && requested > available) inputs.
+  #[cfg(feature = "bytes_1")]
+  #[test]
+  fn try_get_error_conversions_are_total() {
+    use bytes_1::TryGetError;
+
+    let vals = [0usize, 1, 5, usize::MAX];
+    for &requested in &vals {
+      for &available in &vals {
+        let advance: TryAdvanceError = TryGetError {
+          requested,
+          available,
+        }
+        .into();
+        let read: TryReadError = TryGetError {
+          requested,
+          available,
+        }
+        .into();
+
+        // Reaching here already proves totality (no panic); the invariant must hold.
+        assert!(advance.requested().get() > advance.available());
+        assert!(read.requested().get() > read.available());
+
+        // Field preservation on valid, non-degenerate inputs.
+        if requested >= 1 && requested > available {
+          assert_eq!(advance.requested().get(), requested);
+          assert_eq!(advance.available(), available);
+          assert_eq!(read.requested().get(), requested);
+          assert_eq!(read.available(), available);
+        }
+      }
+    }
+  }
+}

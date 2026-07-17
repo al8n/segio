@@ -1,4 +1,4 @@
-use bufkit::{Chunk, ChunkMut};
+use buffo::{Chunk, ChunkMut};
 
 #[derive(Debug)]
 pub enum Error {}

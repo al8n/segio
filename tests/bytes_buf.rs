@@ -3,7 +3,7 @@
 #[cfg(test)]
 #[cfg(all(feature = "bytes_1", feature = "std"))]
 mod bytes_buf_tests {
-  use bufkit::{Chunk, ChunkExt};
+  use buffo::{Chunk, ChunkExt};
   use bytes_1::Bytes;
 
   #[test]

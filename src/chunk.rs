@@ -35,7 +35,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -55,7 +55,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -78,7 +78,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -105,7 +105,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -125,7 +125,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -148,7 +148,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -178,7 +178,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -199,7 +199,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -223,7 +223,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -251,7 +251,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -271,7 +271,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -292,7 +292,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -318,7 +318,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -338,7 +338,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -359,7 +359,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -386,7 +386,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -407,7 +407,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -429,7 +429,7 @@ macro_rules! peek_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let buf = &data[..];
@@ -440,101 +440,6 @@ macro_rules! peek_fixed {
         #[inline]
         fn [<try_peek_ $ty _ne_at>](&self, offset: usize) -> Result<$ty, TryPeekAtError> {
           try_peek_array_at::<_, { core::mem::size_of::<$ty>() }>(self, offset).map(<$ty>::from_ne_bytes)
-        }
-      )*
-    }
-  };
-  (@forward $($ty:ident), +$(,)?) => {
-    paste::paste! {
-      $(
-        #[inline]
-        fn [<peek_ $ty _le>](&self) -> $ty {
-          (**self).[<peek_ $ty _le>]()
-        }
-
-        #[inline]
-        fn [<peek_ $ty _le_checked>](&self) -> Option<$ty> {
-          (**self).[<peek_ $ty _le_checked>]()
-        }
-
-        #[inline]
-        fn [<try_peek_ $ty _le>](&self) -> Result<$ty, TryPeekError> {
-          (**self).[<try_peek_ $ty _le>]()
-        }
-
-        #[inline]
-        fn [<peek_ $ty _be>](&self) -> $ty {
-          (**self).[<peek_ $ty _be>]()
-        }
-
-        #[inline]
-        fn [<peek_ $ty _be_checked>](&self) -> Option<$ty> {
-          (**self).[<peek_ $ty _be_checked>]()
-        }
-
-        #[inline]
-        fn [<try_peek_ $ty _be>](&self) -> Result<$ty, TryPeekError> {
-          (**self).[<try_peek_ $ty _be>]()
-        }
-
-        #[inline]
-        fn [<peek_ $ty _ne>](&self) -> $ty {
-          (**self).[<peek_ $ty _ne>]()
-        }
-
-        #[inline]
-        fn [<peek_ $ty _ne_checked>](&self) -> Option<$ty> {
-          (**self).[<peek_ $ty _ne_checked>]()
-        }
-
-        #[inline]
-        fn [<try_peek_ $ty _ne>](&self) -> Result<$ty, TryPeekError> {
-          (**self).[<try_peek_ $ty _ne>]()
-        }
-
-        #[inline]
-        fn [<peek_ $ty _le_at>](&self, offset: usize) -> $ty {
-          (**self).[<peek_ $ty _le_at>](offset)
-        }
-
-        #[inline]
-        fn [<peek_ $ty _le_at_checked>](&self, offset: usize) -> Option<$ty> {
-          (**self).[<peek_ $ty _le_at_checked>](offset)
-        }
-
-        #[inline]
-        fn [<try_peek_ $ty _le_at>](&self, offset: usize) -> Result<$ty, TryPeekAtError> {
-          (**self).[<try_peek_ $ty _le_at>](offset)
-        }
-
-        #[inline]
-        fn [<peek_ $ty _be_at>](&self, offset: usize) -> $ty {
-          (**self).[<peek_ $ty _be_at>](offset)
-        }
-
-        #[inline]
-        fn [<peek_ $ty _be_at_checked>](&self, offset: usize) -> Option<$ty> {
-          (**self).[<peek_ $ty _be_at_checked>](offset)
-        }
-
-        #[inline]
-        fn [<try_peek_ $ty _be_at>](&self, offset: usize) -> Result<$ty, TryPeekAtError> {
-          (**self).[<try_peek_ $ty _be_at>](offset)
-        }
-
-        #[inline]
-        fn [<peek_ $ty _ne_at>](&self, offset: usize) -> $ty {
-          (**self).[<peek_ $ty _ne_at>](offset)
-        }
-
-        #[inline]
-        fn [<peek_ $ty _ne_at_checked>](&self, offset: usize) -> Option<$ty> {
-          (**self).[<peek_ $ty _ne_at_checked>](offset)
-        }
-
-        #[inline]
-        fn [<try_peek_ $ty _ne_at>](&self, offset: usize) -> Result<$ty, TryPeekAtError> {
-          (**self).[<try_peek_ $ty _ne_at>](offset)
         }
       )*
     }
@@ -557,7 +462,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -577,7 +482,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -601,7 +506,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -631,7 +536,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -651,7 +556,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -675,7 +580,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -708,7 +613,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -729,7 +634,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -754,7 +659,7 @@ macro_rules! read_fixed {
         /// # Examples
         ///
         /// ```rust
-        /// use bufkit::Chunk;
+        /// use buffo::Chunk;
         ///
         /// let data = [147, 23, 89, 201, 156, 74, 33, 198, 67, 142, 91, 205, 38, 177, 124, 59, 183, 96, 241, 167, 82, 135, 49, 213];
         /// let mut buf = &data[..];
@@ -770,56 +675,6 @@ macro_rules! read_fixed {
         #[inline]
         fn [<try_read_ $ty _ne>](&mut self) -> Result<$ty, TryReadError> {
           try_read_array::<_, { core::mem::size_of::<$ty>() }>(self).map(<$ty>::from_ne_bytes)
-        }
-      )*
-    }
-  };
-  (@forward $($ty:ident), +$(,)?) => {
-    paste::paste! {
-      $(
-        #[inline]
-        fn [<read_ $ty _le>](&mut self) -> $ty {
-          (**self).[<read_ $ty _le>]()
-        }
-
-        #[inline]
-        fn [<read_ $ty _le_checked>](&mut self) -> Option<$ty> {
-          (**self).[<read_ $ty _le_checked>]()
-        }
-
-        #[inline]
-        fn [<try_read_ $ty _le>](&mut self) -> Result<$ty, TryReadError> {
-          (**self).[<try_read_ $ty _le>]()
-        }
-
-        #[inline]
-        fn [<read_ $ty _be>](&mut self) -> $ty {
-          (**self).[<read_ $ty _be>]()
-        }
-
-        #[inline]
-        fn [<read_ $ty _be_checked>](&mut self) -> Option<$ty> {
-          (**self).[<read_ $ty _be_checked>]()
-        }
-
-        #[inline]
-        fn [<try_read_ $ty _be>](&mut self) -> Result<$ty, TryReadError> {
-          (**self).[<try_read_ $ty _be>]()
-        }
-
-        #[inline]
-        fn [<read_ $ty _ne>](&mut self) -> $ty {
-          (**self).[<read_ $ty _ne>]()
-        }
-
-        #[inline]
-        fn [<read_ $ty _ne_checked>](&mut self) -> Option<$ty> {
-          (**self).[<read_ $ty _ne_checked>]()
-        }
-
-        #[inline]
-        fn [<try_read_ $ty _ne>](&mut self) -> Result<$ty, TryReadError> {
-          (**self).[<try_read_ $ty _ne>]()
         }
       )*
     }
@@ -842,7 +697,7 @@ pub trait EmptyChunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, EmptyChunk};
+  /// use buffo::{Chunk, EmptyChunk};
   ///
   /// let empty_buf = <&[u8]>::empty();
   /// assert_eq!(empty_buf.remaining(), 0);
@@ -854,6 +709,12 @@ pub trait EmptyChunk {
 }
 
 /// A trait for implementing custom buffers that can read and navigate through byte sequences.
+///
+/// **Coherence obligation:** an implementation must keep `buffer().len()` equal to
+/// [`remaining()`](Chunk::remaining), and neither `buffer()` nor `remaining()` may panic.
+/// The non-panicking default methods (the `*_checked` and `try_*` families) rely on this
+/// invariant to stay panic-free and correct; an incoherent implementation can make them
+/// panic or misbehave.
 ///
 /// This trait provides a comprehensive set of methods for reading data from buffers with different
 /// error handling strategies:
@@ -874,10 +735,12 @@ pub trait Chunk {
   /// This represents how many bytes can be read from the current cursor position
   /// to the end of the buffer.
   ///
+  /// **Implementor obligation:** this must equal `buffer().len()` and must not panic.
+  ///
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -893,10 +756,13 @@ pub trait Chunk {
   /// This provides direct access to all bytes from the current cursor position
   /// to the end of the buffer.
   ///
+  /// **Implementor obligation:** the returned length must equal
+  /// [`remaining()`](Chunk::remaining), and this method must not panic.
+  ///
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -920,7 +786,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1u8, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -941,7 +807,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1u8, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -972,7 +838,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -996,7 +862,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   /// let slice = &buf[..];
@@ -1016,7 +882,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   ///
@@ -1046,7 +912,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   ///
@@ -1068,7 +934,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let mut buf = [1u8, 2, 3, 4, 5];
   /// let slice = &buf[..];
@@ -1098,7 +964,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -1123,7 +989,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1154,7 +1020,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1176,7 +1042,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1208,7 +1074,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1219,7 +1085,7 @@ pub trait Chunk {
   /// let err = Chunk::try_split_off(&mut small_buf, 5).unwrap_err();
   /// // err contains details about requested vs available
   /// ```
-  #[must_use = "consider Chunk::try_split_off if you don't need the other half"]
+  #[must_use = "consider Chunk::truncate if you don't need the other half"]
   fn try_split_off(&mut self, at: usize) -> Result<Self, OutOfBounds>
   where
     Self: Sized,
@@ -1247,7 +1113,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = b"hello world";
   /// let mut buf = &data[..];
@@ -1269,7 +1135,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1299,7 +1165,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1309,7 +1175,7 @@ pub trait Chunk {
   /// let err = Chunk::try_split_to(&mut buf, 10).unwrap_err();
   /// // err contains detailed information about the failure
   /// ```
-  #[must_use = "consider Chunk::try_split_to if you don't need the other half"]
+  #[must_use = "consider Chunk::advance if you don't need the other half"]
   fn try_split_to(&mut self, at: usize) -> Result<Self, OutOfBounds>
   where
     Self: Sized,
@@ -1328,7 +1194,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3];
   /// let mut buf = &data[..];
@@ -1350,7 +1216,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -1387,7 +1253,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = b"Hello, World!";
   /// let buf = &data[..];
@@ -1422,7 +1288,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2, 3];
   /// let buf = &data[..];
@@ -1443,7 +1309,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let buf = &data[..];
@@ -1465,7 +1331,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let buf = &data[..];
@@ -1496,7 +1362,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2, 3];
   /// let buf = &data[..];
@@ -1518,7 +1384,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2];
   /// let buf = &data[..];
@@ -1535,10 +1401,17 @@ pub trait Chunk {
   /// This is the non-panicking version of [`peek_u8_at`](Chunk::peek_u8_at).
   /// Returns `Ok(byte)` if the offset is valid, otherwise returns `Err(TryPeekAtError)`.
   ///
+  /// # Errors
+  ///
+  /// An `offset` strictly past the end returns `OutOfBounds`, while `offset == remaining()`
+  /// (in range, but with no byte to read) returns `InsufficientData`. This read-side
+  /// boundary at `offset == len` is the deliberate opposite of the write-side `put_*_at`,
+  /// where `offset == remaining_mut()` returns `OutOfBounds`.
+  ///
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2];
   /// let buf = &data[..];
@@ -1550,12 +1423,20 @@ pub trait Chunk {
   #[inline]
   fn try_peek_u8_at(&self, offset: usize) -> Result<u8, TryPeekAtError> {
     let buffer = self.buffer();
+    let buf_len = buffer.len();
 
-    if offset >= buffer.len() {
-      return Err(TryPeekAtError::out_of_bounds(offset, buffer.len()));
+    // Two-stage taxonomy, mirroring `try_peek_array_at`: an offset strictly past the
+    // end is `OutOfBounds`, while an in-range offset with too few bytes (for a single
+    // byte, exactly `offset == buf_len`) is `InsufficientData`.
+    match buf_len.checked_sub(offset) {
+      None => Err(TryPeekAtError::out_of_bounds(offset, buf_len)),
+      Some(0) => Err(TryPeekAtError::insufficient_data_with_requested(
+        0,
+        offset,
+        super::NON_ZERO_1,
+      )),
+      Some(_) => Ok(buffer[offset]),
     }
-
-    Ok(buffer[offset])
   }
 
   /// Peeks an `i8` value from the buffer at the specified offset without advancing the cursor.
@@ -1571,7 +1452,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2, 3]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1592,7 +1473,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1612,7 +1493,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1638,7 +1519,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42, 1, 2, 3];
   /// let mut buf = &data[..];
@@ -1661,7 +1542,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let mut buf = &data[..];
@@ -1686,7 +1567,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [42];
   /// let mut buf = &data[..];
@@ -1716,7 +1597,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2, 3]; // 255 as i8 is -1
   /// let buf = &data[..];
@@ -1737,7 +1618,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let buf = &data[..];
@@ -1759,7 +1640,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let buf = &data[..];
@@ -1785,7 +1666,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8, 1, 2, 3]; // 255 as i8 is -1
   /// let mut buf = &data[..];
@@ -1806,7 +1687,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let mut buf = &data[..];
@@ -1824,12 +1705,12 @@ pub trait Chunk {
   /// Reads an `i8` value from the buffer and advances the internal cursor.
   ///
   /// This is the non-panicking version of [`read_i8`](Chunk::read_i8).
-  /// Returns `Ok(byte)` and advances the cursor on success, or `Err(Try
-  /// ReadError)` if the buffer is empty.
+  /// Returns `Ok(byte)` and advances the cursor on success, or `Err(TryReadError)`
+  /// if the buffer is empty.
   ///
   /// # Examples
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [255u8]; // -1 as i8
   /// let mut buf = &data[..];
@@ -1850,7 +1731,7 @@ pub trait Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::Chunk;
+  /// use buffo::Chunk;
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -1908,7 +1789,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -1931,7 +1812,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let buf = &data[..];
@@ -1954,7 +1835,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let buf = &data[..];
@@ -1983,7 +1864,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5, 6, 7, 8];
   /// let buf = &data[..];
@@ -2006,7 +1887,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -2029,7 +1910,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let buf = &data[..];
@@ -2059,7 +1940,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3, 4, 5];
   /// let mut buf = &data[..];
@@ -2083,7 +1964,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let mut buf = &data[..];
@@ -2111,7 +1992,7 @@ pub trait ChunkExt: Chunk {
   /// # Examples
   ///
   /// ```rust
-  /// use bufkit::{Chunk, ChunkExt};
+  /// use buffo::{Chunk, ChunkExt};
   ///
   /// let data = [1, 2, 3];
   /// let mut buf = &data[..];
@@ -2146,6 +2027,7 @@ pub trait ChunkExt: Chunk {
   #[inline]
   fn read_varint<V: Varint>(&mut self) -> Result<(NonZeroUsize, V), DecodeVarintError> {
     V::decode(self.buffer()).inspect(|(len, _)| {
+      debug_assert!(len.get() <= self.remaining());
       self.advance(len.get());
     })
   }
@@ -2156,22 +2038,32 @@ pub trait ChunkExt: Chunk {
   /// as a continuation flag. A set MSB (1) indicates more bytes follow, while an unset MSB (0)
   /// marks the last byte of the varint.
   ///
+  /// This is a **structural** scan: it locates the end of the varint from the
+  /// continuation bits alone and does **not** validate the value against any specific
+  /// integer type's width. A long-but-terminated run is accepted; an unterminated run
+  /// yields `InsufficientData`. For type-bounded decoding that rejects values too wide
+  /// for the target type, use the typed [`read_varint`](ChunkExt::read_varint) /
+  /// [`peek_varint`](ChunkExt::peek_varint) instead.
+  ///
   /// ## Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkExt, Chunk};
+  /// use buffo::{ChunkExt, Chunk};
   ///
   /// let buf = [0x96, 0x01]; // Varint encoding of 150
-  /// let mut chunk = &buf[..];
+  /// let chunk = &buf[..];
   /// assert_eq!(chunk.try_scan_varint().map(|val| val.get()), Ok(2));
   /// assert_eq!(chunk.remaining(), 2); // Cursor not advanced
   ///
   /// let buf = [0x7F]; // Varint encoding of 127
-  /// let mut chunk = &buf[..];
+  /// let chunk = &buf[..];
   /// assert_eq!(chunk.try_scan_varint().map(|val| val.get()), Ok(1));
   /// assert_eq!(chunk.remaining(), 1); // Cursor not advanced
   /// ```
-  fn try_scan_varint(&mut self) -> Result<NonZeroUsize, DecodeVarintError> {
+  fn try_scan_varint(&self) -> Result<NonZeroUsize, DecodeVarintError> {
+    // Structural scan: locate the varint's end via its continuation bits without
+    // bounding the value to any integer type's width. Type-bounded rejection is the
+    // job of the typed `read_varint`/`peek_varint`.
     varing::try_consume_varint(self.buffer()).map_err(Into::into)
   }
 
@@ -2181,29 +2073,37 @@ pub trait ChunkExt: Chunk {
   /// as a continuation flag. A set MSB (1) indicates more bytes follow, while an unset MSB (0)
   /// marks the last byte of the varint.
   ///
+  /// This is a **structural** scan: it locates the end of the varint from the
+  /// continuation bits alone and does **not** validate the value against any specific
+  /// integer type's width. A long-but-terminated run is accepted; an unterminated run
+  /// yields `InsufficientData`. For type-bounded decoding that rejects values too wide
+  /// for the target type, use the typed [`read_varint`](ChunkExt::read_varint) /
+  /// [`peek_varint`](ChunkExt::peek_varint) instead.
+  ///
   /// ## Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkExt, Chunk};
+  /// use buffo::{ChunkExt, Chunk};
   ///
   /// let buf = [0, 0x96, 0x01]; // Varint encoding of 150
-  /// let mut chunk = &buf[..];
+  /// let chunk = &buf[..];
   /// assert_eq!(chunk.try_scan_varint_at(1).map(|val| val.get()), Ok(2));
   /// assert_eq!(chunk.remaining(), 3); // Cursor not advanced
   ///
   /// let buf = [0, 0x7F]; // Varint encoding of 127
-  /// let mut chunk = &buf[..];
+  /// let chunk = &buf[..];
   /// assert_eq!(chunk.try_scan_varint_at(1).map(|val| val.get()), Ok(1));
   /// assert_eq!(chunk.remaining(), 2); // Cursor not advanced
   ///
   /// // Out of bounds example
   /// let err = chunk.try_scan_varint_at(10).unwrap_err();
   /// ```
-  fn try_scan_varint_at(&mut self, offset: usize) -> Result<NonZeroUsize, DecodeVarintAtError> {
+  fn try_scan_varint_at(&self, offset: usize) -> Result<NonZeroUsize, DecodeVarintAtError> {
     self
       .buffer_from_checked(offset)
       .ok_or_else(|| DecodeVarintAtError::out_of_bounds(offset, self.remaining()))
       .and_then(|buf| {
+        // Structural scan (see `try_scan_varint`): no width cap.
         varing::try_consume_varint(buf)
           .map_err(|e| DecodeVarintAtError::from_const_varint_error(e, offset))
       })
@@ -2215,10 +2115,17 @@ pub trait ChunkExt: Chunk {
   /// as a continuation flag. A set MSB (1) indicates more bytes follow, while an unset MSB (0)
   /// marks the last byte of the varint.
   ///
+  /// This is a **structural** scan: it locates the end of the varint from the
+  /// continuation bits alone and does **not** validate the value against any specific
+  /// integer type's width. A long-but-terminated run is accepted; an unterminated run
+  /// yields `InsufficientData`. For type-bounded decoding that rejects values too wide
+  /// for the target type, use the typed [`read_varint`](ChunkExt::read_varint) /
+  /// [`peek_varint`](ChunkExt::peek_varint) instead.
+  ///
   /// ## Examples
   ///
   /// ```rust
-  /// use bufkit::{ChunkExt, Chunk};
+  /// use buffo::{ChunkExt, Chunk};
   ///
   /// let buf = [0x96, 0x01]; // Varint encoding of 150
   /// let mut chunk = &buf[..];
@@ -2231,6 +2138,8 @@ pub trait ChunkExt: Chunk {
   /// assert_eq!(chunk.remaining(), 0); // Cursor advanced
   /// ```
   fn try_consume_varint(&mut self) -> Result<NonZeroUsize, DecodeVarintError> {
+    // Structural scan (see `try_scan_varint`): advance ONLY on `Ok`, so a malformed
+    // (unterminated) run leaves the cursor untouched.
     varing::try_consume_varint(self.buffer())
       .inspect(|len| {
         self.advance(len.get());
@@ -2240,200 +2149,6 @@ pub trait ChunkExt: Chunk {
 }
 
 impl<T: Chunk> ChunkExt for T {}
-
-#[allow(unused)]
-macro_rules! deref_forward_buf {
-  () => {
-    #[inline]
-    fn remaining(&self) -> usize {
-      (**self).remaining()
-    }
-
-    #[inline]
-    fn has_remaining(&self) -> bool {
-      (**self).has_remaining()
-    }
-
-    #[inline]
-    fn buffer(&self) -> &[u8] {
-      (**self).buffer()
-    }
-
-    #[inline]
-    fn buffer_from(&self, offset: usize) -> &[u8] {
-      (**self).buffer_from(offset)
-    }
-
-    #[inline]
-    fn buffer_from_checked(&self, offset: usize) -> Option<&[u8]> {
-      (**self).buffer_from_checked(offset)
-    }
-
-    #[inline]
-    fn advance(&mut self, cnt: usize) {
-      (**self).advance(cnt);
-    }
-
-    #[inline]
-    fn try_advance(&mut self, cnt: usize) -> Result<(), TryAdvanceError> {
-      (**self).try_advance(cnt)
-    }
-
-    #[inline]
-    fn prefix(&self, len: usize) -> &[u8] {
-      (**self).prefix(len)
-    }
-
-    #[inline]
-    fn prefix_checked(&self, len: usize) -> Option<&[u8]> {
-      (**self).prefix_checked(len)
-    }
-
-    #[inline]
-    fn suffix(&self, len: usize) -> &[u8] {
-      (**self).suffix(len)
-    }
-
-    #[inline]
-    fn suffix_checked(&self, len: usize) -> Option<&[u8]> {
-      (**self).suffix_checked(len)
-    }
-
-    #[inline]
-    fn segment(&self, range: impl RangeBounds<usize>) -> Self
-    where
-      Self: Sized,
-    {
-      (**self).segment(range)
-    }
-
-    #[inline]
-    fn try_segment(&self, range: impl RangeBounds<usize>) -> Result<Self, TrySegmentError>
-    where
-      Self: Sized,
-    {
-      (**self).try_segment(range)
-    }
-
-    #[inline]
-    fn truncate(&mut self, len: usize) {
-      (**self).truncate(len);
-    }
-
-    #[inline]
-    fn split_off(&mut self, at: usize) -> Self
-    where
-      Self: Sized,
-    {
-      (**self).split_off(at)
-    }
-
-    #[inline]
-    fn split_off_checked(&mut self, at: usize) -> Option<Self>
-    where
-      Self: Sized,
-    {
-      (**self).split_off_checked(at)
-    }
-
-    #[inline]
-    fn try_split_off(&mut self, at: usize) -> Result<Self, OutOfBounds>
-    where
-      Self: Sized,
-    {
-      (**self).try_split_off(at)
-    }
-
-    #[inline]
-    fn split_to(&mut self, at: usize) -> Self
-    where
-      Self: Sized,
-    {
-      (**self).split_to(at)
-    }
-
-    #[inline]
-    fn split_to_checked(&mut self, at: usize) -> Option<Self>
-    where
-      Self: Sized,
-    {
-      (**self).split_to_checked(at)
-    }
-
-    #[inline]
-    fn try_split_to(&mut self, at: usize) -> Result<Self, OutOfBounds>
-    where
-      Self: Sized,
-    {
-      (**self).try_split_to(at)
-    }
-
-    peek_fixed!(@forward u16, u32, u64, u128, i16, i32, i64, i128, f32, f64);
-    read_fixed!(@forward u16, u32, u64, u128, i16, i32, i64, i128, f32, f64);
-
-    #[inline]
-    fn peek_u8(&self) -> u8 {
-      (**self).peek_u8()
-    }
-
-    #[inline]
-    fn peek_u8_checked(&self) -> Option<u8> {
-      (**self).peek_u8_checked()
-    }
-
-    #[inline]
-    fn try_peek_u8(&self) -> Result<u8, TryPeekError> {
-      (**self).try_peek_u8()
-    }
-
-    #[inline]
-    fn read_u8(&mut self) -> u8 {
-      (**self).read_u8()
-    }
-
-    #[inline]
-    fn read_u8_checked(&mut self) -> Option<u8> {
-      (**self).read_u8_checked()
-    }
-
-    #[inline]
-    fn try_read_u8(&mut self) -> Result<u8, TryReadError>
-    {
-      (**self).try_read_u8()
-    }
-
-    #[inline]
-    fn peek_i8(&self) -> i8 {
-      (**self).peek_i8()
-    }
-
-    #[inline]
-    fn peek_i8_checked(&self) -> Option<i8> {
-      (**self).peek_i8_checked()
-    }
-
-    #[inline]
-    fn try_peek_i8(&self) -> Result<i8, TryPeekError>
-    {
-      (**self).try_peek_i8()
-    }
-
-    #[inline]
-    fn read_i8(&mut self) -> i8 {
-      (**self).read_i8()
-    }
-
-    #[inline]
-    fn read_i8_checked(&mut self) -> Option<i8> {
-      (**self).read_i8_checked()
-    }
-
-    #[inline]
-    fn try_read_i8(&mut self) -> Result<i8, TryReadError> {
-      (**self).try_read_i8()
-    }
-  }
-}
 
 impl EmptyChunk for &[u8] {
   #[inline]
@@ -2634,7 +2349,7 @@ const _: () = {
   )]
   impl EmptyChunk for Bytes {
     /// ```rust
-    /// use bufkit::{EmptyChunk, Chunk};
+    /// use buffo::{EmptyChunk, Chunk};
     /// use bytes_1::Bytes;
     ///
     /// let empty = Bytes::empty();
@@ -2875,7 +2590,7 @@ fn try_peek_array_at<B: Chunk + ?Sized, const N: usize>(
 fn check_out_of_bounds(method_name: &'static str, at: usize, remaining: usize) {
   assert!(
     at <= remaining,
-    "{method_name} out of bounds: {at} <= {remaining}",
+    "{method_name} out of bounds: {at} > {remaining}",
   );
 }
 
@@ -3164,10 +2879,90 @@ mod tests {
   }
 
   #[test]
-  #[cfg(feature = "bytes_1")]
+  #[cfg(all(feature = "bytes_1", any(feature = "std", feature = "alloc")))]
   fn test_to_bytes() {
     let slice = Wrapper(&[1, 2, 3, 4, 5]);
     let bytes = slice.to_bytes();
     assert_eq!(bytes, bytes_1::Bytes::from(&[1, 2, 3, 4, 5][..]));
+  }
+
+  // Fix 1 (P2): the untyped varint scan is STRUCTURAL — it locates the end of the varint
+  // from its continuation bits and does NOT bound the value to any specific integer type's
+  // width. A long-but-terminated run is accepted here; type-bounded rejection is the job of
+  // the typed `read_varint`/`peek_varint`. (There is no correct finite universal cap: wider
+  // `Varint` impls — e.g. ruint/bnum/primitive-types U256/U512 — are reachable via feature
+  // unification through the generic `V: Varint` APIs.)
+  #[test]
+  fn varint_scan_is_structural() {
+    // `[0x80; 20] ++ [0x00]` = 21 bytes: a well-formed MSB-terminated run, longer than any
+    // fixed-width integer's varint encoding. The structural scan accepts it.
+    let mut overlong = [0x80u8; 21];
+    overlong[20] = 0x00;
+
+    // `try_scan_varint` accepts it structurally and never advances the cursor.
+    let buf = &overlong[..];
+    assert_eq!(buf.try_scan_varint().map(|v| v.get()), Ok(21));
+    assert_eq!(buf.remaining(), 21);
+
+    // `try_scan_varint_at` accepts it too.
+    let buf_at = &overlong[..];
+    assert_eq!(buf_at.try_scan_varint_at(0).map(|v| v.get()), Ok(21));
+
+    // `try_consume_varint` accepts it AND advances the cursor by the full structural length.
+    let mut buf = &overlong[..];
+    assert_eq!(buf.try_consume_varint().map(|v| v.get()), Ok(21));
+    assert_eq!(
+      buf.remaining(),
+      0,
+      "consume advances by the structural length"
+    );
+
+    // Parity: the TYPED decode REJECTS the same input (too wide for `u64`). This documents
+    // the intended structural-vs-typed difference.
+    let mut buf = &overlong[..];
+    assert!(buf.read_varint::<u64>().is_err());
+
+    // A normal short varint still scans and consumes successfully.
+    let valid = [0x96u8, 0x01]; // encodes 150
+    let buf = &valid[..];
+    assert_eq!(buf.try_scan_varint().map(|v| v.get()), Ok(2));
+    assert_eq!(buf.remaining(), 2); // scan does not advance
+    let mut buf = &valid[..];
+    assert_eq!(buf.try_consume_varint().map(|v| v.get()), Ok(2));
+    assert_eq!(buf.remaining(), 0); // consume advances
+  }
+
+  // Fix 2 (P2): `try_peek_u8_at`/`try_peek_i8_at` must use the same two-stage taxonomy as
+  // every other `*_at` method: `offset > len` is `OutOfBounds`, `offset == len` (in range
+  // but no byte to read) is `InsufficientData`.
+  #[test]
+  fn peek_u8_at_taxonomy_is_two_stage() {
+    let buf = &[1u8][..]; // length 1
+
+    // Valid offset -> Ok.
+    assert_eq!(buf.try_peek_u8_at(0), Ok(1));
+
+    // offset == len -> InsufficientData (not OutOfBounds).
+    assert!(matches!(
+      buf.try_peek_u8_at(1),
+      Err(TryPeekAtError::InsufficientData(_))
+    ));
+
+    // offset > len -> OutOfBounds.
+    assert!(matches!(
+      buf.try_peek_u8_at(2),
+      Err(TryPeekAtError::OutOfBounds(_))
+    ));
+
+    // The i8 variant mirrors the u8 taxonomy.
+    assert_eq!(buf.try_peek_i8_at(0), Ok(1));
+    assert!(matches!(
+      buf.try_peek_i8_at(1),
+      Err(TryPeekAtError::InsufficientData(_))
+    ));
+    assert!(matches!(
+      buf.try_peek_i8_at(2),
+      Err(TryPeekAtError::OutOfBounds(_))
+    ));
   }
 }
