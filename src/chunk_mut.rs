@@ -2905,7 +2905,7 @@ mod tests {
 
             let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
             assert_eq!(empty.[< put_ $ty _checked >](42), None); // Out of bounds,
-            assert_eq!(empty.buffer_mut(), &[]);
+            assert_eq!(empty.buffer_mut(), &[] as &[u8]);
           }
 
           #[test]
@@ -2917,7 +2917,7 @@ mod tests {
 
             let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
             assert_eq!(empty.[< try_put_ $ty >](42), Err(InsufficientSpace::new(crate::NON_ZERO_1, 0)));
-            assert_eq!(empty.buffer_mut(), &[]);
+            assert_eq!(empty.buffer_mut(), &[] as &[u8]);
           }
 
           #[test]
@@ -2990,7 +2990,7 @@ mod tests {
           assert_eq!(slice.buffer_mut(), (42 as $ty).[< to_ $endian _bytes >]().as_slice());
           let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
           assert_eq!(empty.[< try_put_ $ty _ $endian >](42 as $ty), Err(InsufficientSpace::new(must_non_zero(size_of::<$ty>()), 0)));
-          assert_eq!(empty.buffer_mut(), &[]);
+          assert_eq!(empty.buffer_mut(), &[] as &[u8]);
         }
 
         #[test]
@@ -3022,7 +3022,7 @@ mod tests {
 
           let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
           assert_eq!(empty.[< try_put_ $ty _ $endian _at >](42 as $ty, 0), Err(TryPutAtError::out_of_bounds(0, 0)));
-          assert_eq!(empty.buffer_mut(), &[]);
+          assert_eq!(empty.buffer_mut(), &[] as &[u8]);
         }
       }
     };
@@ -3104,7 +3104,7 @@ mod tests {
 
             let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
             assert_eq!(empty.[< write_ $ty _checked >](42), None); // Out of bounds,
-            assert_eq!(empty.buffer_mut(), &[]);
+            assert_eq!(empty.buffer_mut(), &[] as &[u8]);
           }
 
           #[test]
@@ -3116,7 +3116,7 @@ mod tests {
 
             let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
             assert_eq!(empty.[< try_write_ $ty >](42), Err(InsufficientSpace::new(crate::NON_ZERO_1, 0)));
-            assert_eq!(empty.buffer_mut(), &[]);
+            assert_eq!(empty.buffer_mut(), &[] as &[u8]);
           }
         )*
       }
@@ -3134,7 +3134,7 @@ mod tests {
           let mut slice = ChunkWriter::from(&mut buf[..]);
           let written = slice.[< write_ $ty _ $endian >](42 as $ty);
           assert_eq!(written, size_of::<$ty>());
-          assert_eq!(slice.buffer_mut(), &[]);
+          assert_eq!(slice.buffer_mut(), &[] as &[u8]);
 
           assert_eq!(buf, (42 as $ty).[< to_ $endian _bytes >]().as_slice());
         }
@@ -3144,13 +3144,13 @@ mod tests {
           let mut buf = [0u8; size_of::<$ty>()];
           let mut slice = ChunkWriter::from(&mut buf[..]);
           assert_eq!(slice.[< write_ $ty _ $endian _checked >](42 as $ty), Some(size_of::<$ty>()));
-          assert_eq!(slice.buffer_mut(), &[]);
+          assert_eq!(slice.buffer_mut(), &[] as &[u8]);
 
           assert_eq!(buf, (42 as $ty).[< to_ $endian _bytes >]().as_slice());
 
           let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
           assert_eq!(empty.[< write_ $ty _ $endian _checked >](42 as $ty), None); // Out of bounds
-          assert_eq!(empty.buffer_mut(), &[]);
+          assert_eq!(empty.buffer_mut(), &[] as &[u8]);
         }
 
         #[test]
@@ -3158,12 +3158,12 @@ mod tests {
           let mut buf = [0u8; size_of::<$ty>()];
           let mut slice = ChunkWriter::from(&mut buf[..]);
           assert_eq!(slice.[< try_write_ $ty _ $endian >](42 as $ty), Ok(size_of::<$ty>()));
-          assert_eq!(slice.buffer_mut(), &[]);
+          assert_eq!(slice.buffer_mut(), &[] as &[u8]);
           assert_eq!(buf, (42 as $ty).[< to_ $endian _bytes >]().as_slice());
 
           let mut empty: ChunkWriter<&mut [u8]> = ChunkWriter::from(&mut [][..]);
           assert_eq!(empty.[< try_write_ $ty _ $endian >](42 as $ty), Err(InsufficientSpace::new(must_non_zero(size_of::<$ty>()), 0)));
-          assert_eq!(empty.buffer_mut(), &[]);
+          assert_eq!(empty.buffer_mut(), &[] as &[u8]);
         }
       }
     };

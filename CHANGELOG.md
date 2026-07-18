@@ -2,7 +2,22 @@
 
 ## 0.8.0 (Jul 17th, 2026)
 
-Renamed the crate from `bufkit` to `buffo`. Bumped `varing` to `0.14`.
+Renamed the crate from `bufkit` to `buffo`, bumped `varing` to `0.14`, added an
+optional `smol-bytes` integration, and raised the MSRV to 1.85.
+
+### Added
+
+- Optional `smol_bytes_01` feature integrating
+  [`smol-bytes`](https://crates.io/crates/smol-bytes), read-only like the
+  `bytes_1` integration (owned buffers get `Chunk`, not `ChunkMut`): `Chunk`
+  for `smol_bytes::Bytes`, `compact::Bytes`, `BytesMut`, and the inline
+  `Buffer` (the latter usable even in `no_std` + no-alloc; its `Chunk` impl
+  is pure-core); `to_smol_bytes`/`to_smol_bytes_mut` conversions; and
+  `From<smol_bytes::TryGetError>` conversions. The UTF-8 types are
+  intentionally not integrated — their invariant is incompatible with
+  raw-byte `ChunkMut` access; reach the byte-level type via their
+  `as_inner()`/`into_inner()`. Raises the MSRV to 1.85 (required by
+  `smol-bytes`).
 
 ### Fixed (soundness / panic-freedom)
 

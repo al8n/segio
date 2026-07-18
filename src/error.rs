@@ -760,30 +760,49 @@ impl From<DecodeVarintAtError> for std::io::Error {
   }
 }
 
-#[cfg(feature = "bytes_1")]
-const _: () = {
-  use bytes_1::TryGetError;
-
-  // Normalizes a `(requested, available)` pair taken from `bytes::TryGetError` so that
-  // it always satisfies the `requested >= 1` and `requested > available` invariants of
-  // these error types. `bytes::TryGetError` exposes public `requested`/`available`
-  // fields, so any pair (including `requested == 0` or `requested <= available`) is
-  // constructible; degenerate pairs are normalized here rather than panicked on, while
-  // valid non-degenerate inputs are preserved verbatim.
-  #[inline]
-  fn normalize(requested: usize, available: usize) -> (NonZeroUsize, usize) {
-    match NonZeroUsize::new(requested) {
-      Some(requested) if requested.get() > available => (requested, available),
-      _ => {
-        // A valid error cannot have `available == usize::MAX` (no larger `requested`
-        // exists), so clamp it down by one in that single case to keep the invariant
-        // satisfiable; then `available + 1` is non-zero and strictly greater.
-        let available = available.min(usize::MAX - 1);
-        let requested = NonZeroUsize::new(available + 1).unwrap_or(NonZeroUsize::MIN);
-        (requested, available)
-      }
+// Normalizes a `(requested, available)` pair taken from `bytes::TryGetError` (and, via the
+// same nominal type under smol-bytes' std/alloc tiers, `smol_bytes::TryGetError`) so that it
+// always satisfies the `requested >= 1` and `requested > available` invariants of these error
+// types. These source error types expose public `requested`/`available` fields, so any pair
+// (including `requested == 0` or `requested <= available`) is constructible; degenerate pairs
+// are normalized here rather than panicked on, while valid non-degenerate inputs are preserved
+// verbatim.
+#[cfg(any(
+  feature = "bytes_1",
+  all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))
+))]
+#[inline]
+fn normalize(requested: usize, available: usize) -> (NonZeroUsize, usize) {
+  match NonZeroUsize::new(requested) {
+    Some(requested) if requested.get() > available => (requested, available),
+    _ => {
+      // A valid error cannot have `available == usize::MAX` (no larger `requested`
+      // exists), so clamp it down by one in that single case to keep the invariant
+      // satisfiable; then `available + 1` is non-zero and strictly greater.
+      let available = available.min(usize::MAX - 1);
+      let requested = NonZeroUsize::new(available + 1).unwrap_or(NonZeroUsize::MIN);
+      (requested, available)
     }
   }
+}
+
+// `bytes::TryGetError` and `smol_bytes::TryGetError` are the SAME nominal type whenever
+// smol-bytes is built with `std`/`alloc` (smol re-exports `bytes::TryGetError`), so a single
+// `From<TryGetError>` impl must cover both. Writing a separate
+// `From<smol_bytes_01::TryGetError>` would be a duplicate impl (E0119) when both features are
+// enabled. The cfg-selected `use` below picks whichever name is in scope. In pure-core smol
+// (no std/alloc) no `TryGetError` conversion exists at all — buffo's pure-core
+// `Chunk for Buffer` impl keeps the trait read defaults and never produces one, and smol's
+// pure-core `TryGetError` identity is not knowable here.
+#[cfg(any(
+  feature = "bytes_1",
+  all(feature = "smol_bytes_01", any(feature = "std", feature = "alloc"))
+))]
+const _: () = {
+  #[cfg(feature = "bytes_1")]
+  use bytes_1::TryGetError;
+  #[cfg(all(not(feature = "bytes_1"), feature = "smol_bytes_01"))]
+  use smol_bytes_01::TryGetError;
 
   impl From<TryGetError> for TryAdvanceError {
     fn from(e: TryGetError) -> Self {
